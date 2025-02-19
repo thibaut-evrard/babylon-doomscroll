@@ -12,6 +12,7 @@ const Game: React.FC = () => {
   const [speed, setSpeed] = useState<number>(0);
   const [rewards, setRewards] = useState<string[]>([]);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
+const [animationSpeed, setAnimationSpeed] = useState<number>(5);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -50,6 +51,10 @@ const Game: React.FC = () => {
 
   const stopGame = () => {
     setIsGameRunning(false);
+    setTime(0);
+    setDistance(0);
+    setSpeed(0);
+    setRewards([]);
   };
 
   const handleScroll = (scrolledDistance: number) => {
@@ -60,9 +65,17 @@ const Game: React.FC = () => {
     <div className="game-container">
       {showConfetti && <Confetti />}
       <DisplayScreen time={time} distance={distance} speed={speed} />
-      <RunningTrack isRunning={isGameRunning} onScroll={handleScroll} />
-      <button className="button" onClick={startGame}>Démarrer</button>
-      <button className="button" onClick={stopGame}>Arrêter</button>
+      <RunningTrack isRunning={isGameRunning} speed={speed} onScroll={handleScroll} />
+      <div className="button-container">
+        <img
+          src="/start_button.jpg"
+          alt="Démarrer"
+          className="button"
+          onClick={startGame}
+          style={{ cursor: 'pointer' }}
+        />
+        <button className="button" onClick={stopGame}>Stop</button>
+      </div>
       <div className="rewards-popup">
         {rewards.length > 0 && (
           <div className="rewards-content">
