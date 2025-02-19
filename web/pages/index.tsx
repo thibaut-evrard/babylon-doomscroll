@@ -6,7 +6,12 @@ const Home: React.FC = () => {
     <div className="home-container">
       <h1>Bienvenue dans Doomscroll</h1>
       <Link href="/game">
-        <button className="button">Je souhaite absolument scroller</button>
+      <img 
+          src="/start_button.jpg"
+          alt="Démarrer"
+          className="button"
+          style={{ cursor: 'pointer' }}
+        />
       </Link>
     </div>
   );
