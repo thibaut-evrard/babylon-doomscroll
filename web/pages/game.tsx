@@ -12,7 +12,15 @@ const Game: React.FC = () => {
   const [speed, setSpeed] = useState<number>(0);
   const [rewards, setRewards] = useState<string[]>([]);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
-const [animationSpeed, setAnimationSpeed] = useState<number>(5);
+  const [userName, setUserName] = useState<string>('');
+  const [scores, setScores] = useState<{ name: string; distance: number; title?: string }[]>([]);
+
+  useEffect(() => {
+    const name = prompt('Veuillez entrer votre blaze :');
+    if (name) {
+      setUserName(name);
+    }
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -51,6 +59,8 @@ const [animationSpeed, setAnimationSpeed] = useState<number>(5);
 
   const stopGame = () => {
     setIsGameRunning(false);
+    const title = rewards.length > 0 ? rewards[rewards.length - 1] : undefined;
+    setScores((prevScores) => [...prevScores, { name: userName, distance, title }]);
     setTime(0);
     setDistance(0);
     setSpeed(0);
@@ -64,29 +74,43 @@ const [animationSpeed, setAnimationSpeed] = useState<number>(5);
   return (
     <div className="game-container">
       {showConfetti && <Confetti />}
-      <DisplayScreen time={time} distance={distance} speed={speed} />
-      <RunningTrack isRunning={isGameRunning} speed={speed} onScroll={handleScroll} />
-      <div className="button-container">
-        <img
-          src="/start_button.jpg"
-          alt="Démarrer"
-          className="button"
-          onClick={startGame}
-          style={{ cursor: 'pointer' }}
-        />
-        <button className="button" onClick={stopGame}>Stop</button>
+      <div>
+        <DisplayScreen time={time} distance={distance} speed={speed} />
+        <RunningTrack isRunning={isGameRunning} speed={speed} onScroll={handleScroll} />
+        <div className="button-container">
+          <img
+            src="/start_button.jpg"
+            alt="Démarrer"
+            className="button"
+            onClick={startGame}
+            style={{ cursor: 'pointer' }}
+          />
+          <button className="button" onClick={stopGame}>Arrêter</button>
+        </div>
       </div>
-      <div className="rewards-popup">
-        {rewards.length > 0 && (
-          <div className="rewards-content">
-            <h3>Félicitations !</h3>
-            <ul>
-              {rewards.map((reward, index) => (
-                <li key={index}>{reward}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+      <div>
+        <div className="score-board">
+          <h3>Hall of Fame</h3>
+          <ul>
+            {scores.map((score, index) => (
+              <li key={index}>
+                {score.name}: {score.distance} m {score.title && `(${score.title})`}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="rewards-popup">
+          {rewards.length > 0 && (
+            <div className="rewards-content">
+              <h3>Récompenses</h3>
+              <ul>
+                {rewards.map((reward, index) => (
+                  <li key={index}>{reward}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

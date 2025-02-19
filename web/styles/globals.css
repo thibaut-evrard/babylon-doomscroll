@@ -9,7 +9,7 @@ body {
   margin: 0;
 }
 .button {
-  background-color: #5d5e5d; 
+  background-color: #5d5e5d;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -30,7 +30,10 @@ body {
   transform: scale(0.95);
 }
 .game-container {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px; /* Espace entre les éléments */
 }
 .button-container {
   display: flex;
@@ -38,4 +41,47 @@ body {
   align-items: center;
   gap: 10px; /* Espace entre les boutons */
   margin-top: 20px;
+}
+.score-board {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px;
+  width: 300px; /* Augmentez la largeur pour que les récompenses rentrent sur une ligne */
+  margin-left: 20px; /* Espace entre le tapis et le tableau des scores */
+}
+.score-board h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  text-align: center;
+}
+.score-board ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.score-board li {
+  margin: 5px 0;
+  font-size: 16px;
+}
+.rewards-popup {
+  margin-top: 20px;
+}
+.rewards-content h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  text-align: center;
+}
+.rewards-content ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Affiche les récompenses sur une ligne */
+  flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
+}
+.rewards-content li {
+  margin: 5px 10px; /* Ajustez l'espacement entre les récompenses */
+  font-size: 16px;
 }
