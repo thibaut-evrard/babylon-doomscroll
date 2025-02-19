@@ -87,7 +87,7 @@ const Game: React.FC = () => {
             onClick={startGame}
             style={{ cursor: 'pointer' }}
           />
-          <button className="button" onClick={stopGame}>Arrêter</button>
+          <button className="button" onClick={stopGame}>Stop</button>
         </div>
       </div>
       <div>
