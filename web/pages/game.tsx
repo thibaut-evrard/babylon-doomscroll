@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 import DisplayScreen from '../components/DisplayScreen';
 import RunningTrack from '../components/RunningTrack';
+import Confetti from 'react-confetti';
+import '../styles/globals.css';
+import { REWARDS } from '../config/rewardsConfig';
 
 const Game: React.FC = () => {
   const [isGameRunning, setIsGameRunning] = useState<boolean>(false);
   const [time, setTime] = useState<number>(0);
   const [distance, setDistance] = useState<number>(0);
   const [speed, setSpeed] = useState<number>(0);
+  const [rewards, setRewards] = useState<string[]>([]);
+  const [showConfetti, setShowConfetti] = useState<boolean>(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -26,6 +31,19 @@ const Game: React.FC = () => {
     }
   }, [time, distance]);
 
+  useEffect(() => {
+    updateRewards(distance);
+  }, [distance]);
+
+  const updateRewards = (distance: number) => {
+    const newRewards = REWARDS.filter(reward => distance >= reward.distance).map(reward => reward.name);
+    if (newRewards.length > rewards.length) {
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 5000);
+    }
+    setRewards(newRewards);
+  };
+
   const startGame = () => {
     setIsGameRunning(true);
   };
@@ -40,10 +58,23 @@ const Game: React.FC = () => {
 
   return (
     <div className="game-container">
+      {showConfetti && <Confetti />}
       <DisplayScreen time={time} distance={distance} speed={speed} />
       <RunningTrack isRunning={isGameRunning} onScroll={handleScroll} />
-      <button onClick={startGame}>Démarrer</button>
-      <button onClick={stopGame}>Arrêter</button>
+      <button className="button" onClick={startGame}>Démarrer</button>
+      <button className="button" onClick={stopGame}>Arrêter</button>
+      <div className="rewards-popup">
+        {rewards.length > 0 && (
+          <div className="rewards-content">
+            <h3>Félicitations !</h3>
+            <ul>
+              {rewards.map((reward, index) => (
+                <li key={index}>{reward}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -6,9 +6,10 @@ const Home: React.FC = () => {
     <div className="home-container">
       <h1>Bienvenue dans Doomscroll</h1>
       <Link href="/game">
-        <button>C'est ici pour scroller</button>
+        <button className="button">Je souhaite absolument scroller</button>
       </Link>
     </div>
   );
 };
+
 export default Home;
