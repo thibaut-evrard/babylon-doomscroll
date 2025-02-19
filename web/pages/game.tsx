@@ -60,7 +60,9 @@ const Game: React.FC = () => {
   const stopGame = () => {
     setIsGameRunning(false);
     const title = rewards.length > 0 ? rewards[rewards.length - 1] : undefined;
-    setScores((prevScores) => [...prevScores, { name: userName, distance, title }]);
+    const newScores = [...scores, { name: userName, distance, title }];
+    newScores.sort((a, b) => b.distance - a.distance); // Trier les scores par distance décroissante
+    setScores(newScores);
     setTime(0);
     setDistance(0);
     setSpeed(0);
@@ -102,7 +104,7 @@ const Game: React.FC = () => {
         <div className="rewards-popup">
           {rewards.length > 0 && (
             <div className="rewards-content">
-              <h3>Récompenses</h3>
+              <h3>Titres débloqués</h3>
               <ul>
                 {rewards.map((reward, index) => (
                   <li key={index}>{reward}</li>
