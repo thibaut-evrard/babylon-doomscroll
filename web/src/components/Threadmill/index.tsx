@@ -1,19 +1,25 @@
-import { useEffect, useRef } from 'react';
-import styles from '../styles/RunningTrack.module.css';
+import Carpet from './Carpet';
+import styles from './styles.module.scss';
+import {FC, useEffect, useRef, useState} from 'react';
 
-interface RunningTrackProps {
+interface Props {
   isRunning: boolean;
   onScroll: (distance: number) => void;
 }
 
-const RunningTrack: React.FC<RunningTrackProps> = ({ isRunning, onScroll }) => {
+const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
+  const [distance, setDistance] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    onScroll(distance);
+  }, [distance]);
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
       if (event.deltaY > 0) {
         // Incrémente la distance de 1 mètre à chaque défilement vers le bas
-        onScroll(1);
+        setDistance((prev) => prev + event.deltaY / 100);
       }
     };
 
@@ -29,11 +35,11 @@ const RunningTrack: React.FC<RunningTrackProps> = ({ isRunning, onScroll }) => {
   }, [isRunning, onScroll]);
 
   return (
-    <div className={styles.runningTrack} ref={trackRef}>
-      {/* Tapis de course défilant */}
-      <div className={styles.runner}></div>
+    <div className={styles.running_track} ref={trackRef}>
+      <img src='/tapis_small.jpg' />
+      <Carpet distance={distance} />
     </div>
   );
 };
 
-export default RunningTrack;
+export default Threadmill;
