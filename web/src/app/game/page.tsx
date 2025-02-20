@@ -2,10 +2,10 @@
 import styles from './page.module.scss';
 import {useState, useEffect} from 'react';
 import Confetti from 'react-confetti';
-import DisplayScreen from '../../../components/DisplayScreen';
-import Leaderboard from '../../../components/Leaderboard';
-import DoomScrollGame from '../../../components/DoomScrollGame';
-import Menu from '../../../components/Menu';
+import DisplayScreen from '../../components/DisplayScreen';
+import Leaderboard from '../../components/Leaderboard';
+import DoomScrollGame from '../../components/DoomScrollGame';
+import Menu from '../../components/Menu';
 
 export interface Score {
   name: string;
