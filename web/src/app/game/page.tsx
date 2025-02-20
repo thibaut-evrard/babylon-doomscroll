@@ -5,6 +5,13 @@ import Confetti from 'react-confetti';
 import DisplayScreen from '../../../components/DisplayScreen';
 import Threadmill from '../../../components/Threadmill';
 import {REWARDS} from '../../../config/rewardsConfig';
+import Leaderboard from '../../../components/Leaderboard';
+
+export interface Score {
+  name: string;
+  distance: number;
+  title: string;
+}
 
 const Game: React.FC = () => {
   const [isGameRunning, setIsGameRunning] = useState<boolean>(false);
@@ -14,9 +21,7 @@ const Game: React.FC = () => {
   const [rewards, setRewards] = useState<string[]>([]);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>('');
-  const [scores, setScores] = useState<
-    {name: string; distance: number; title?: string}[]
-  >([]);
+  const [scores, setScores] = useState<Score[]>([]);
 
   useEffect(() => {
     const name = prompt('Veuillez entrer votre blaze :');
@@ -81,6 +86,7 @@ const Game: React.FC = () => {
   return (
     <div className={styles.game_container}>
       {showConfetti && <Confetti />}
+
       <div>
         <DisplayScreen time={time} distance={distance} speed={speed} />
         <Threadmill isRunning={isGameRunning} onScroll={handleScroll} />
@@ -97,31 +103,7 @@ const Game: React.FC = () => {
           </button>
         </div>
       </div>
-      <div>
-        <div className='score-board'>
-          <h3>Hall of Fame</h3>
-          <ul>
-            {scores.map((score, index) => (
-              <li key={index}>
-                {score.name}: {score.distance} m{' '}
-                {score.title && `(${score.title})`}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className='rewards-popup'>
-          {rewards.length > 0 && (
-            <div className='rewards-content'>
-              <h3>Titres débloqués</h3>
-              <ul>
-                {rewards.map((reward, index) => (
-                  <li key={index}>{reward}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
+      <Leaderboard scores={scores} rewards={rewards} />
     </div>
   );
 };
