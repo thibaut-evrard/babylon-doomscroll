@@ -1,24 +1,23 @@
-import { View, Text, Button } from "react-native";
-import { styles } from "./styles";
-import { useEffect, useRef, useState } from "react";
+import {View, Text, Button} from 'react-native';
+import {styles} from './styles';
+import {useEffect, useRef, useState} from 'react';
 
 interface Props {
   scrollDistance: number;
 }
 
 const CONTENT = {
-  cta: "end doomscroll",
+  cta: 'end doomscroll',
 };
 const PX_TO_M = 0.0005;
 const CTA_TIMEOUT = 500;
 
-const Stats = ({ scrollDistance }: Props) => {
+const Stats = ({scrollDistance}: Props) => {
   const timeoutRef = useRef<any>(null);
   const distance = (scrollDistance * PX_TO_M).toFixed(4);
   const [isCta, setIsCta] = useState(false);
 
   useEffect(() => {
-    console.log(distance);
     setIsCta(false);
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
