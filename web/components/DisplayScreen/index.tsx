@@ -1,16 +1,12 @@
+import {FC} from 'react';
+import {GameStats} from '@/app/game/page';
 import styles from './styles.module.css';
 
-interface DisplayScreenProps {
-  time: number;
-  distance: number;
-  speed: number;
+interface Props {
+  stats: GameStats;
 }
 
-const DisplayScreen: React.FC<DisplayScreenProps> = ({
-  time,
-  distance,
-  speed,
-}) => {
+const DisplayScreen: FC<Props> = ({stats}) => {
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -22,9 +18,9 @@ const DisplayScreen: React.FC<DisplayScreenProps> = ({
 
   return (
     <div className={styles.displayScreen}>
-      <div>Temps: {formatTime(time)}</div>
-      <div>Distance: {distance.toFixed(2)} m</div>
-      <div>Vitesse moy.: {speed.toFixed(2)} km/h</div>
+      <div>Temps: {formatTime(stats.time)}</div>
+      <div>Distance: {stats.distance.toFixed(2)} m</div>
+      <div>Vitesse moy.: {stats.speed.toFixed(2)} km/h</div>
     </div>
   );
 };
