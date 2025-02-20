@@ -33,8 +33,8 @@ const DoomScrollGame: FC<Props> = ({
     setRewards(newRewards);
   };
 
-  const handleOnScroll = (scrolledDistance: number) => {
-    setDistance((prevDistance) => prevDistance + scrolledDistance);
+  const handleOnScroll = (newDistance: number) => {
+    setDistance(newDistance);
   };
 
   const startClock = () => {

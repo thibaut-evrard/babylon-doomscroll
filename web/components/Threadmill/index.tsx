@@ -1,5 +1,6 @@
+import Carpet from './Carpet';
 import styles from './styles.module.css';
-import {FC, useEffect, useRef} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 
 interface Props {
   isRunning: boolean;
@@ -7,13 +8,18 @@ interface Props {
 }
 
 const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
+  const [distance, setDistance] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    onScroll(distance);
+  }, [distance]);
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
       if (event.deltaY > 0) {
         // Incrémente la distance de 1 mètre à chaque défilement vers le bas
-        onScroll(1);
+        setDistance((prev) => prev + 1);
       }
     };
 
@@ -30,8 +36,7 @@ const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
 
   return (
     <div className={styles.runningTrack} ref={trackRef}>
-      {/* Tapis de course défilant */}
-      <div className={styles.runner}></div>
+      <Carpet distance={distance} />
     </div>
   );
 };
