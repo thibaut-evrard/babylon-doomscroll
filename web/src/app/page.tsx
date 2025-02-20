@@ -1,17 +1,20 @@
 'use client';
 import Link from 'next/link';
 
+const CONTENT = {
+  title: 'Bienvenue dans Doomscroll',
+  img: {
+    src: '/start_button.jpg',
+    alt: 'Démarrer',
+  },
+};
+
 const Home: React.FC = () => {
   return (
-    <div className='home-container'>
-      <h1>Bienvenue dans Doomscroll</h1>
+    <div>
+      <h1>{CONTENT.title}</h1>
       <Link href='/game'>
-        <img
-          src='/start_button.jpg'
-          alt='Démarrer'
-          className='button'
-          style={{cursor: 'pointer'}}
-        />
+        <img {...CONTENT.img} className='button' />
       </Link>
     </div>
   );

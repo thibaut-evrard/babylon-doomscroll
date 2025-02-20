@@ -1,4 +1,5 @@
 'use client';
+import './page.module.scss';
 import ThreeContainer from '@/components/Three/Container';
 import BabylonDoomscroll from '@/components/Three/Scenes/BabylonDoomscroll';
 import {useThree} from '@/hooks/useThree';
