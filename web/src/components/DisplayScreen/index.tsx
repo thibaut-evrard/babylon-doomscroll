@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {GameStats} from '@/app/game/page';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
 interface Props {
   stats: GameStats;

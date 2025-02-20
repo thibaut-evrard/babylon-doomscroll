@@ -1,7 +1,7 @@
 import {GameStats, GameStatus, Score} from '@/app/game/page';
 import {FC, useEffect, useRef, useState} from 'react';
 import Threadmill from '../Threadmill';
-import {REWARDS} from '../../../config/rewardsConfig';
+import {REWARDS} from '../../config/rewardsConfig';
 
 interface Props {
   userName: string;
@@ -25,11 +25,9 @@ const DoomScrollGame: FC<Props> = ({
   const [rewards, setRewards] = useState<string[]>([]);
 
   const updateRewards = (newDistance: number) => {
-    console.log(newDistance);
     const newRewards = REWARDS.filter(
       (reward) => newDistance >= reward.distance
     ).map((reward) => reward.name);
-    console.log(newRewards);
     setRewards(newRewards);
   };
 

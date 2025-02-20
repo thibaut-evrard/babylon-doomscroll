@@ -1,5 +1,5 @@
 import Carpet from './Carpet';
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 import {FC, useEffect, useRef, useState} from 'react';
 
 interface Props {
@@ -35,7 +35,8 @@ const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
   }, [isRunning, onScroll]);
 
   return (
-    <div className={styles.runningTrack} ref={trackRef}>
+    <div className={styles.running_track} ref={trackRef}>
+      <img src='/tapis_small.jpg' />
       <Carpet distance={distance} />
     </div>
   );

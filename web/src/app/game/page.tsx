@@ -82,9 +82,11 @@ const Game: React.FC = () => {
           onStats={handleOnStats}
           onRewards={handleOnRewards}
         />
-        <Menu onStart={startGame} onEnd={endGame} />
+        <Menu onStart={startGame} onEnd={endGame} status={status} />
       </div>
-      <Leaderboard scores={scores} rewards={rewards} />
+      {status === GameStatus.OVER && (
+        <Leaderboard scores={scores} rewards={rewards} />
+      )}
     </div>
   );
 };

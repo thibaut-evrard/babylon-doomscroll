@@ -1,4 +1,5 @@
 'use client';
+import styles from './page.module.scss';
 import Link from 'next/link';
 
 const CONTENT = {
@@ -11,7 +12,7 @@ const CONTENT = {
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <div className={styles.intro_container}>
       <h1>{CONTENT.title}</h1>
       <Link href='/game'>
         <img {...CONTENT.img} className='button' />
