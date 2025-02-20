@@ -1,5 +1,5 @@
 'use client';
-
+import styles from './page.module.scss';
 import {useState, useEffect} from 'react';
 import Confetti from 'react-confetti';
 import DisplayScreen from '../../../components/DisplayScreen';
@@ -79,7 +79,7 @@ const Game: React.FC = () => {
   };
 
   return (
-    <div className='game-container'>
+    <div className={styles.game_container}>
       {showConfetti && <Confetti />}
       <div>
         <DisplayScreen time={time} distance={distance} speed={speed} />
