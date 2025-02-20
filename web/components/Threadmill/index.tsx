@@ -19,7 +19,7 @@ const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
     const handleScroll = (event: WheelEvent) => {
       if (event.deltaY > 0) {
         // Incrémente la distance de 1 mètre à chaque défilement vers le bas
-        setDistance((prev) => prev + 1);
+        setDistance((prev) => prev + event.deltaY / 100);
       }
     };
 
