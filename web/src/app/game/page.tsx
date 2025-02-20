@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-import DisplayScreen from '../components/DisplayScreen';
-import RunningTrack from '../components/RunningTrack';
+'use client';
+
+import {useState, useEffect} from 'react';
 import Confetti from 'react-confetti';
-import '../styles/globals.css';
-import { REWARDS } from '../config/rewardsConfig';
+import DisplayScreen from '../../../components/DisplayScreen';
+import Threadmill from '../../../components/Threadmill';
+import {REWARDS} from '../../../config/rewardsConfig';
 
 const Game: React.FC = () => {
   const [isGameRunning, setIsGameRunning] = useState<boolean>(false);
@@ -13,7 +14,9 @@ const Game: React.FC = () => {
   const [rewards, setRewards] = useState<string[]>([]);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>('');
-  const [scores, setScores] = useState<{ name: string; distance: number; title?: string }[]>([]);
+  const [scores, setScores] = useState<
+    {name: string; distance: number; title?: string}[]
+  >([]);
 
   useEffect(() => {
     const name = prompt('Veuillez entrer votre blaze :');
@@ -45,7 +48,9 @@ const Game: React.FC = () => {
   }, [distance]);
 
   const updateRewards = (distance: number) => {
-    const newRewards = REWARDS.filter(reward => distance >= reward.distance).map(reward => reward.name);
+    const newRewards = REWARDS.filter(
+      (reward) => distance >= reward.distance
+    ).map((reward) => reward.name);
     if (newRewards.length > rewards.length) {
       setShowConfetti(true);
       setTimeout(() => setShowConfetti(false), 5000);
@@ -60,7 +65,7 @@ const Game: React.FC = () => {
   const stopGame = () => {
     setIsGameRunning(false);
     const title = rewards.length > 0 ? rewards[rewards.length - 1] : undefined;
-    const newScores = [...scores, { name: userName, distance, title }];
+    const newScores = [...scores, {name: userName, distance, title}];
     newScores.sort((a, b) => b.distance - a.distance); // Trier les scores par distance décroissante
     setScores(newScores);
     setTime(0);
@@ -74,36 +79,39 @@ const Game: React.FC = () => {
   };
 
   return (
-    <div className="game-container">
+    <div className='game-container'>
       {showConfetti && <Confetti />}
       <div>
         <DisplayScreen time={time} distance={distance} speed={speed} />
-        <RunningTrack isRunning={isGameRunning} speed={speed} onScroll={handleScroll} />
-        <div className="button-container">
+        <Threadmill isRunning={isGameRunning} onScroll={handleScroll} />
+        <div className='button-container'>
           <img
-            src="/start_button.jpg"
-            alt="Démarrer"
-            className="button"
+            src='/start_button.jpg'
+            alt='Démarrer'
+            className='button'
             onClick={startGame}
-            style={{ cursor: 'pointer' }}
+            style={{cursor: 'pointer'}}
           />
-          <button className="button" onClick={stopGame}>Stop</button>
+          <button className='button' onClick={stopGame}>
+            Stop
+          </button>
         </div>
       </div>
       <div>
-        <div className="score-board">
+        <div className='score-board'>
           <h3>Hall of Fame</h3>
           <ul>
             {scores.map((score, index) => (
               <li key={index}>
-                {score.name}: {score.distance} m {score.title && `(${score.title})`}
+                {score.name}: {score.distance} m{' '}
+                {score.title && `(${score.title})`}
               </li>
             ))}
           </ul>
         </div>
-        <div className="rewards-popup">
+        <div className='rewards-popup'>
           {rewards.length > 0 && (
-            <div className="rewards-content">
+            <div className='rewards-content'>
               <h3>Titres débloqués</h3>
               <ul>
                 {rewards.map((reward, index) => (

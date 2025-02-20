@@ -1,25 +1,20 @@
 'use client';
-import ThreeContainer from '@/components/Three/Container';
-import BabylonDoomscroll from '@/components/Three/Scenes/BabylonDoomscroll';
-import {useThree} from '@/hooks/useThree';
-import {useEffect, useState} from 'react';
+import Link from 'next/link';
 
-const Page = () => {
-  const [scene, setScene] = useState<ThreeContainer | null>(null);
-  const {containerRef} = useThree(scene);
-
-  useEffect(() => {
-    setScene(new BabylonDoomscroll());
-  }, []);
-
+const Home: React.FC = () => {
   return (
-    <div className='game__wrapper'>
-      <div className='game__view'>
-        <div ref={containerRef} className='game__container' />
-        <div className='game__overlay'></div>
-      </div>
+    <div className='home-container'>
+      <h1>Bienvenue dans Doomscroll</h1>
+      <Link href='/game'>
+        <img
+          src='/start_button.jpg'
+          alt='Démarrer'
+          className='button'
+          style={{cursor: 'pointer'}}
+        />
+      </Link>
     </div>
   );
 };
 
-export default Page;
+export default Home;

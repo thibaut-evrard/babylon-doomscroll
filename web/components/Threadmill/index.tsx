@@ -1,12 +1,12 @@
-import { useEffect, useRef } from 'react';
-import styles from '../styles/RunningTrack.module.css';
+import styles from './styles.module.css';
+import {FC, useEffect, useRef} from 'react';
 
-interface RunningTrackProps {
+interface Props {
   isRunning: boolean;
   onScroll: (distance: number) => void;
 }
 
-const RunningTrack: React.FC<RunningTrackProps> = ({ isRunning, onScroll }) => {
+const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
   const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,4 +36,4 @@ const RunningTrack: React.FC<RunningTrackProps> = ({ isRunning, onScroll }) => {
   );
 };
 
-export default RunningTrack;
+export default Threadmill;

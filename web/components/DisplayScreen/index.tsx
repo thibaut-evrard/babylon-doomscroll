@@ -1,4 +1,4 @@
-import styles from '../styles/DisplayScreen.module.css';
+import styles from './styles.module.css';
 
 interface DisplayScreenProps {
   time: number;
@@ -6,11 +6,18 @@ interface DisplayScreenProps {
   speed: number;
 }
 
-const DisplayScreen: React.FC<DisplayScreenProps> = ({ time, distance, speed }) => {
+const DisplayScreen: React.FC<DisplayScreenProps> = ({
+  time,
+  distance,
+  speed,
+}) => {
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(
+      2,
+      '0'
+    )}`;
   };
 
   return (
