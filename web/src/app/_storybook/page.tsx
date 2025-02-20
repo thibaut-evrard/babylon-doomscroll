@@ -1,5 +1,5 @@
 'use client';
-import './page.module.scss';
+import styles from './page.module.scss';
 import ThreeContainer from '@/components/Three/Container';
 import BabylonDoomscroll from '@/components/Three/Scenes/BabylonDoomscroll';
 import {useThree} from '@/hooks/useThree';
@@ -14,10 +14,10 @@ const Page = () => {
   }, []);
 
   return (
-    <div className='game__wrapper'>
-      <div className='game__view'>
-        <div ref={containerRef} className='game__container' />
-        <div className='game__overlay'></div>
+    <div className={styles.game__wrapper}>
+      <div className={styles.game__view}>
+        <div ref={containerRef} className={styles.game__container} />
+        <div className={styles.game__overlay}></div>
       </div>
     </div>
   );
