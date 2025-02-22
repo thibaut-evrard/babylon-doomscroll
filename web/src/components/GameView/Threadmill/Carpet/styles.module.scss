@@ -1,4 +1,7 @@
 .container {
+  user-select: none;
+  pointer-events: none;
+
   position: absolute;
 
   left: 55px;
