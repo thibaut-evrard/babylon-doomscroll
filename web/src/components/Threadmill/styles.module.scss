@@ -1,0 +1,12 @@
+.running_track {
+  position: relative;
+  width: 350px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+
+  &img {
+    position: absolute;
+    height: 100%;
+  }
+}
