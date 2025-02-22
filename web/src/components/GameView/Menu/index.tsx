@@ -1,5 +1,5 @@
-import {GameStatus} from '@/app/game/page';
 import {FC} from 'react';
+import {GameStatus} from '..';
 
 interface Props {
   onStart: () => void;

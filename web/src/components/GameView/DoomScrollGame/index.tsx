@@ -1,7 +1,7 @@
-import {GameStats, GameStatus, Score} from '@/app/game/page';
+import {GameStats, GameStatus, Score} from '..';
 import {FC, useEffect, useRef, useState} from 'react';
 import Threadmill from '../Threadmill';
-import {REWARDS} from '../../config/rewardsConfig';
+import {REWARDS} from '@/config/rewardsConfig';
 
 interface Props {
   userName: string;
