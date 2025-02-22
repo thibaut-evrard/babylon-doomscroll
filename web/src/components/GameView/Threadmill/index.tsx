@@ -21,7 +21,8 @@ const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
   };
 
   useEffect(() => {
-    const userInput = new UserInput(document.body);
+    if (!trackRef.current) return;
+    const userInput = new UserInput(trackRef.current);
     const gameInput = new GameInput(userInput);
 
     gameInput.onScroll = (v) => handleMobileScroll(-v);

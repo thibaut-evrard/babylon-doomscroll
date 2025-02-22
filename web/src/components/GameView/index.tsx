@@ -6,6 +6,7 @@ import DoomScrollGame from './DoomScrollGame';
 import Menu from './Menu';
 import Leaderboard from './Leaderboard';
 import {useGameStore} from '@/store';
+import IntroView from './IntroView';
 
 export interface Score {
   name: string;
@@ -14,9 +15,9 @@ export interface Score {
 }
 
 export enum GameStatus {
-  NOT_PLAYED,
-  PLAYING,
-  OVER,
+  NOT_PLAYED = 'not-played',
+  PLAYING = 'playing',
+  OVER = 'game-over',
 }
 
 export interface GameStats {
@@ -42,6 +43,10 @@ const GameView: React.FC = () => {
     setScores(newScores);
   };
 
+  const handleOnStartGame = () => {
+    setStatus(GameStatus.PLAYING);
+  };
+
   const handleOnStats = (stats: GameStats) => {
     setStats(stats);
   };
@@ -61,6 +66,8 @@ const GameView: React.FC = () => {
     }
   }, [achievements]);
 
+  console.log(status);
+
   return (
     <div>
       {showConfetti && <Confetti />}
@@ -75,6 +82,9 @@ const GameView: React.FC = () => {
       </div>
       {status === GameStatus.OVER && (
         <Leaderboard scores={scores} rewards={achievements} />
+      )}
+      {status === GameStatus.NOT_PLAYED && (
+        <IntroView onStartGame={handleOnStartGame} />
       )}
     </div>
   );
