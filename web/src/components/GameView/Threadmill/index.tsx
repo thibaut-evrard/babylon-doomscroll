@@ -33,7 +33,6 @@ const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
   }, [isRunning]);
 
   useEffect(() => {
-    console.log(distance);
     onScroll(distance);
   }, [distance]);
 

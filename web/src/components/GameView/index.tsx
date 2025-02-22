@@ -5,6 +5,7 @@ import DisplayScreen from './DisplayScreen';
 import DoomScrollGame from './DoomScrollGame';
 import Menu from './Menu';
 import Leaderboard from './Leaderboard';
+import {useGameStore} from '@/store';
 
 export interface Score {
   name: string;
@@ -25,6 +26,7 @@ export interface GameStats {
 }
 
 const GameView: React.FC = () => {
+  const {achievements} = useGameStore();
   const [status, setStatus] = useState(GameStatus.NOT_PLAYED);
   const [stats, setStats] = useState<GameStats>({
     time: 0,
@@ -32,17 +34,7 @@ const GameView: React.FC = () => {
     speed: 0,
   });
   const [showConfetti, setShowConfetti] = useState(false);
-  const [userName, setUserName] = useState('');
   const [scores, setScores] = useState<Score[]>([]);
-  const [rewards, setRewards] = useState<string[]>([]);
-
-  const handleOnRewards = (newRewards: string[]) => {
-    if (newRewards.length > rewards.length) {
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 5000);
-    }
-    setRewards(rewards);
-  };
 
   const handleOnOver = (score: Score) => {
     const newScores = [...scores, score] as Score[];
@@ -54,13 +46,6 @@ const GameView: React.FC = () => {
     setStats(stats);
   };
 
-  useEffect(() => {
-    const name = prompt('Veuillez entrer votre blaze :');
-    if (name) {
-      setUserName(name);
-    }
-  }, []);
-
   const startGame = () => {
     setStatus(GameStatus.PLAYING);
   };
@@ -69,22 +54,27 @@ const GameView: React.FC = () => {
     setStatus(GameStatus.OVER);
   };
 
+  useEffect(() => {
+    if (achievements.length > 0) {
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 5000);
+    }
+  }, [achievements]);
+
   return (
     <div>
       {showConfetti && <Confetti />}
       <div>
         <DisplayScreen stats={stats} />
         <DoomScrollGame
-          userName={userName}
           status={status}
           onOver={handleOnOver}
           onStats={handleOnStats}
-          onRewards={handleOnRewards}
         />
         <Menu onStart={startGame} onEnd={endGame} status={status} />
       </div>
       {status === GameStatus.OVER && (
-        <Leaderboard scores={scores} rewards={rewards} />
+        <Leaderboard scores={scores} rewards={achievements} />
       )}
     </div>
   );

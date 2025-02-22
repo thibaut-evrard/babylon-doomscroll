@@ -6,7 +6,6 @@ export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);
 
   const updateIsMobile = () => {
-    console.log(window.innerWidth);
     setIsMobile(window.innerWidth < MOBILE_PX_MIN_WIDTH);
   };
   useEffect(() => {
