@@ -20,18 +20,16 @@ const IntroView: FC<Props> = ({onStartGame}) => {
   };
 
   return (
-    <div className={styles.game__intro_container}>
-      <div className={styles.game__intro_container__wrapper}>
-        <section>
-          <h1>{CONTENT.title}</h1>
-          <p>{CONTENT.description}</p>
-        </section>
-        <section>
-          <p>{CONTENT.namePrompt}</p>
-          <input type='text' onChange={handleOnChange} />
-          <button onClick={onStartGame}>SCROLL!</button>
-        </section>
-      </div>
+    <div className={styles.game_intro}>
+      <section>
+        <h1>{CONTENT.title}</h1>
+        <p>{CONTENT.description}</p>
+      </section>
+      <section>
+        <p>{CONTENT.namePrompt}</p>
+        <input type='text' onChange={handleOnChange} />
+        <button onClick={onStartGame}>SCROLL!</button>
+      </section>
     </div>
   );
 };

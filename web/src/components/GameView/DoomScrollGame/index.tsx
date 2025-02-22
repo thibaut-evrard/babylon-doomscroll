@@ -1,3 +1,4 @@
+import styles from './styles.module.scss';
 import {GameStats, GameStatus, Score} from '..';
 import {FC, useEffect, useRef, useState} from 'react';
 import Threadmill from '../Threadmill';
@@ -70,7 +71,7 @@ const DoomScrollGame: FC<Props> = ({status, onOver, onStats}) => {
   }, [distance]);
 
   return (
-    <div>
+    <div className={styles.threadmill__container}>
       <Threadmill
         isRunning={status === GameStatus.PLAYING}
         onScroll={handleOnScroll}

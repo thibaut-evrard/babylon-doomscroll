@@ -1,4 +1,5 @@
 'use client';
+import styles from './styles.module.scss';
 import {useState, useEffect} from 'react';
 import Confetti from 'react-confetti';
 import DisplayScreen from './DisplayScreen';
@@ -7,6 +8,7 @@ import Menu from './Menu';
 import Leaderboard from './Leaderboard';
 import {useGameStore} from '@/store';
 import IntroView from './IntroView';
+import Overlay from '../Layout/Overlay';
 
 export interface Score {
   name: string;
@@ -71,7 +73,7 @@ const GameView: React.FC = () => {
   return (
     <div>
       {showConfetti && <Confetti />}
-      <div>
+      <div className={styles.game__container}>
         <DisplayScreen stats={stats} />
         <DoomScrollGame
           status={status}
@@ -81,10 +83,14 @@ const GameView: React.FC = () => {
         <Menu onStart={startGame} onEnd={endGame} status={status} />
       </div>
       {status === GameStatus.OVER && (
-        <Leaderboard scores={scores} rewards={achievements} />
+        <Overlay>
+          <Leaderboard scores={scores} rewards={achievements} />
+        </Overlay>
       )}
       {status === GameStatus.NOT_PLAYED && (
-        <IntroView onStartGame={handleOnStartGame} />
+        <Overlay>
+          <IntroView onStartGame={handleOnStartGame} />
+        </Overlay>
       )}
     </div>
   );
