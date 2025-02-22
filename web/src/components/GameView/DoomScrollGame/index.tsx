@@ -48,7 +48,7 @@ const DoomScrollGame: FC<Props> = ({status, onOver, onStats}) => {
   useEffect(() => {
     if (time > 0) {
       // Calculer la vitesse en km/h
-      const speedKmh = (distance / time) * 3.6; // Convertir m/s en km/h
+      const speedKmh = (distance / time) * 0.36; // Convertir m/s en km/h
       setSpeed(speedKmh);
     }
   }, [time, distance]);

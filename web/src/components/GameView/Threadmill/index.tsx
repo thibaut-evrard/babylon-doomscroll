@@ -9,6 +9,8 @@ interface Props {
   onScroll: (distance: number) => void;
 }
 
+const SCROLL_SPEED = 0.001;
+
 const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
   const [distance, setDistance] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -16,7 +18,7 @@ const Threadmill: FC<Props> = ({isRunning, onScroll}) => {
   const handleMobileScroll = (value: number) => {
     if (!isRunning) return;
     if (value > 0) {
-      setDistance((prev) => prev + value);
+      setDistance((prev) => prev + value * SCROLL_SPEED);
     }
   };
 
