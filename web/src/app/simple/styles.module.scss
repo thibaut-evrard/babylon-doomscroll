@@ -1,0 +1,24 @@
+.scroll {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  max-width: 600px;
+
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tile {
+  position: relative;
+  background-color: #ddd;
+  border-radius: 20px;
+  height: 500px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
