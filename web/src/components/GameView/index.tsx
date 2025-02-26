@@ -68,8 +68,6 @@ const GameView: React.FC = () => {
     }
   }, [achievements]);
 
-  console.log(status);
-
   return (
     <div>
       {showConfetti && <Confetti />}

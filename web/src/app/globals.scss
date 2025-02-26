@@ -25,6 +25,17 @@ p {
   font-size: 20px;
 }
 
+button {
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  padding: 20px 40px;
+  border-radius: 50px;
+  border: none;
+  box-shadow: 0 0 10px blue;
+  cursor: pointer;
+}
+
 .button {
   background-color: #5d5e5d;
   border: none;

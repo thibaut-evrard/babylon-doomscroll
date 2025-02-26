@@ -1,6 +1,7 @@
-import {useCallback, useEffect, useRef} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import styles from './styles.module.scss';
 import {playAnimation} from './animation';
+import EndCta from './EndCta';
 
 const CONTENT = {
   title: 'Fumeur de C.E',
@@ -12,6 +13,8 @@ const BADGE_SCROLL = 40000;
 const Overlay = () => {
   const ref = useRef<HTMLImageElement>(null);
   const isBadgeRef = useRef(false);
+  const previousScrollRef = useRef(0);
+  const [isStationary, setIsStationary] = useState(false);
 
   const handleOnScroll = useCallback(() => {
     if (!ref.current) return;
@@ -19,6 +22,20 @@ const Overlay = () => {
       isBadgeRef.current = true;
       playAnimation(ref.current);
     }
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (window.scrollY < 1000) return;
+      if (previousScrollRef.current === window.scrollY) {
+        setIsStationary(true);
+      } else {
+        setIsStationary(false);
+      }
+      previousScrollRef.current = window.scrollY;
+    }, 500);
+
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -35,6 +52,7 @@ const Overlay = () => {
         <img src='/ce.svg' />
         <p>{CONTENT.description}</p>
       </div>
+      <EndCta isVisible={isStationary} />
     </div>
   );
 };
