@@ -1,6 +1,6 @@
 import {ChangeEvent, FC} from 'react';
 import styles from './styles.module.scss';
-import {useGameStore} from '@/store';
+import {useGameStore} from '@/store/game';
 
 interface Props {
   onStartGame: () => void;

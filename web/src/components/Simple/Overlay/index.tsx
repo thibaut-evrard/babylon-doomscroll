@@ -1,8 +1,11 @@
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {FC, useCallback, useEffect, useRef, useState} from 'react';
 import styles from './styles.module.scss';
 import {playAnimation} from './animation';
 import EndCta from './EndCta';
-import Takeaway from '../Takeaway';
+
+interface Props {
+  onEnd: () => void;
+}
 
 const CONTENT = {
   title: 'Fumeur de C.E',
@@ -10,13 +13,13 @@ const CONTENT = {
 };
 
 const BADGE_SCROLL = 40000;
+const SCROLL_CHECK_INTERVAL = 500;
 
-const Overlay = () => {
+const Overlay: FC<Props> = ({onEnd}) => {
   const ref = useRef<HTMLImageElement>(null);
   const isBadgeRef = useRef(false);
   const previousScrollRef = useRef(0);
   const [isStationary, setIsStationary] = useState(false);
-  const [isTakeaway, setIsTakeaway] = useState(false);
 
   const handleOnScroll = useCallback(() => {
     if (!ref.current) return;
@@ -25,10 +28,6 @@ const Overlay = () => {
       playAnimation(ref.current);
     }
   }, []);
-
-  const handleOnEnd = () => {
-    setIsTakeaway(true);
-  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,7 +38,7 @@ const Overlay = () => {
         setIsStationary(false);
       }
       previousScrollRef.current = window.scrollY;
-    }, 500);
+    }, SCROLL_CHECK_INTERVAL);
 
     return () => clearInterval(interval);
   }, []);
@@ -58,8 +57,7 @@ const Overlay = () => {
         <img src='/ce.svg' />
         <p>{CONTENT.description}</p>
       </div>
-      <EndCta isVisible={isStationary} onClick={handleOnEnd} />
-      {isTakeaway && <Takeaway />}
+      <EndCta isVisible={isStationary} onClick={onEnd} />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import {GameStats, GameStatus, Score} from '..';
 import {FC, useEffect, useRef, useState} from 'react';
 import Threadmill from '../Threadmill';
 import {REWARDS} from '@/config/rewardsConfig';
-import {useGameStore} from '@/store';
+import {useGameStore} from '@/store/game';
 
 interface Props {
   status: GameStatus;

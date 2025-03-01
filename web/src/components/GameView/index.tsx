@@ -6,7 +6,7 @@ import DisplayScreen from './DisplayScreen';
 import DoomScrollGame from './DoomScrollGame';
 import Menu from './Menu';
 import Leaderboard from './Leaderboard';
-import {useGameStore} from '@/store';
+import {useGameStore} from '@/store/game';
 import IntroView from './IntroView';
 import Overlay from '../Layout/Overlay';
 
