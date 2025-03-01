@@ -25,6 +25,20 @@ p {
   font-size: 20px;
 }
 
+.text {
+  &__small {
+    font-size: 20px;
+  }
+
+  &__medium {
+    font-size: 25px;
+  }
+
+  &__large {
+    font-size: 30px;
+  }
+}
+
 button {
   background-color: black;
   color: white;

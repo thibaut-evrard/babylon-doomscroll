@@ -2,6 +2,7 @@ import {useCallback, useEffect, useRef, useState} from 'react';
 import styles from './styles.module.scss';
 import {playAnimation} from './animation';
 import EndCta from './EndCta';
+import Takeaway from '../Takeaway';
 
 const CONTENT = {
   title: 'Fumeur de C.E',
@@ -15,6 +16,7 @@ const Overlay = () => {
   const isBadgeRef = useRef(false);
   const previousScrollRef = useRef(0);
   const [isStationary, setIsStationary] = useState(false);
+  const [isTakeaway, setIsTakeaway] = useState(false);
 
   const handleOnScroll = useCallback(() => {
     if (!ref.current) return;
@@ -23,6 +25,10 @@ const Overlay = () => {
       playAnimation(ref.current);
     }
   }, []);
+
+  const handleOnEnd = () => {
+    setIsTakeaway(true);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,7 +58,8 @@ const Overlay = () => {
         <img src='/ce.svg' />
         <p>{CONTENT.description}</p>
       </div>
-      <EndCta isVisible={isStationary} />
+      <EndCta isVisible={isStationary} onClick={handleOnEnd} />
+      {isTakeaway && <Takeaway />}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 
 interface Props {
   isVisible: boolean;
+  onClick: () => void;
 }
 
 const CONTENT = {
@@ -11,7 +12,7 @@ const CONTENT = {
   cta: 'voire stats',
 };
 
-const EndCta: FC<Props> = ({isVisible}) => {
+const EndCta: FC<Props> = ({isVisible, onClick}) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (isVisible) {
@@ -36,7 +37,7 @@ const EndCta: FC<Props> = ({isVisible}) => {
   return (
     <div className={styles.end_container} ref={ref}>
       <h2>{CONTENT.title}</h2>
-      <button>{CONTENT.cta}</button>
+      <button onClick={onClick}>{CONTENT.cta}</button>
     </div>
   );
 };
