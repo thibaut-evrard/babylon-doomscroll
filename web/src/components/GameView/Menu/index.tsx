@@ -1,5 +1,6 @@
-import {GameStatus} from '@/app/game/page';
+import styles from './styles.module.scss';
 import {FC} from 'react';
+import {GameStatus} from '..';
 
 interface Props {
   onStart: () => void;
@@ -9,7 +10,7 @@ interface Props {
 
 const Menu: FC<Props> = ({onStart, onEnd, status}) => {
   return (
-    <div className='button-container'>
+    <div className={styles.menu}>
       {status === GameStatus.PLAYING ? (
         <button className='button' onClick={onEnd}>
           Stop

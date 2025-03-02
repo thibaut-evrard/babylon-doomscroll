@@ -1,10 +1,15 @@
+.leaderboard {
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
 .score_board {
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 12px;
   padding: 10px;
   width: 400px;
-  margin-left: 20px; /* Espace entre le tapis et le tableau des scores */
 
   h3 {
     margin: 0;
@@ -26,6 +31,8 @@
 }
 
 .rewards_popup {
+  background-color: white;
+  border: 1px solid #ccc;
   margin-top: 20px;
 }
 

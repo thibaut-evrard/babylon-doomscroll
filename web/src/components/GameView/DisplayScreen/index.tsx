@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {GameStats} from '@/app/game/page';
+import {GameStats} from '@/components/GameView';
 import styles from './styles.module.scss';
 
 interface Props {

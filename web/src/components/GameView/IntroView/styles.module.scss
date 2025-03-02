@@ -1,0 +1,15 @@
+.game_intro {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+
+  section {
+    & > * {
+      margin: 10px;
+    }
+    input {
+      display: block;
+      margin: auto;
+    }
+  }
+}

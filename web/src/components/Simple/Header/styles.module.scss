@@ -1,0 +1,32 @@
+@keyframes tease {
+  0% {
+    translate: 0 10px;
+  }
+  100% {
+    translate: 0 0;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 20px;
+  border-radius: 0px;
+  height: 100dvh;
+
+  text-align: center;
+
+  & > div {
+    margin-bottom: 30px;
+  }
+
+  h1 {
+    margin-bottom: 50px;
+  }
+}
+
+.arrow {
+  animation: tease 1s infinite alternate linear;
+}

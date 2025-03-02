@@ -1,5 +1,5 @@
 import styles from './index.module.scss';
-import {Score} from '@/app/game/page';
+import {Score} from '..';
 import {FC} from 'react';
 
 interface Props {
@@ -14,13 +14,13 @@ const CONTENT = {
 
 const Leaderboard: FC<Props> = ({scores, rewards}) => {
   return (
-    <div>
+    <div className={styles.leaderboard}>
       <div className={styles.score_board}>
         <h3>{CONTENT.title}</h3>
         <ul>
           {scores.map((score, index) => (
             <li key={index}>
-              {score.name}: {score.distance} m{' '}
+              {score.name}: {score.distance.toFixed(2)} m{' '}
               {score.title && `(${score.title})`}
             </li>
           ))}
