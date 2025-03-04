@@ -24,7 +24,7 @@ const Tiles: FC<Props> = ({containerRef}) => {
     <>
       {tiles.map((_, index) => (
         <div key={index} className={styles.tile}>
-          <h1>{index + 1}</h1>
+          <h1>{(index + 1) / 10}m</h1>
         </div>
       ))}
     </>

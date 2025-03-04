@@ -1,34 +1,43 @@
-import {FC, useCallback, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import styles from './styles.module.scss';
-import {playAnimation} from './animation';
 import EndCta from './EndCta';
 import {useOnScroll} from '@/hooks/useOnScroll';
+import Trophy from './Trophy';
+import {TROPHIES, TrophyContent} from '@/config/trophies';
 
 interface Props {
   onEnd: () => void;
 }
 
-const CONTENT = {
-  title: 'Fumeur de C.E',
-  description: 'parcours 100 posts',
-};
-
-const BADGE_SCROLL = 40000;
 const SCROLL_CHECK_INTERVAL = 500;
 
 const Overlay: FC<Props> = ({onEnd}) => {
-  const ref = useRef<HTMLImageElement>(null);
-  const isBadgeRef = useRef(false);
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const previousScrollRef = useRef(0);
+  const nextTrophyRef = useRef(TROPHIES[0]);
+  const [trophy, setTrophy] = useState<TrophyContent | null>(null);
   const [isStationary, setIsStationary] = useState(false);
 
   useOnScroll(() => {
-    if (!ref.current) return;
-    if (window.scrollY > BADGE_SCROLL && !isBadgeRef.current) {
-      isBadgeRef.current = true;
-      playAnimation(ref.current);
+    const nextTrophy = nextTrophyRef.current;
+    if (!nextTrophy) return;
+
+    if (trophy) {
+      console.log(trophy.scroll, nextTrophy.scroll);
     }
-  }, [ref]);
+
+    if (progressBarRef.current) {
+      const minScroll = trophy?.scroll || 0;
+      const maxScroll = nextTrophy.scroll;
+      const progress = (window.scrollY - minScroll) / (maxScroll - minScroll);
+      progressBarRef.current.style.scale = `1 ${progress}`;
+    }
+
+    if (window.scrollY > nextTrophy.scroll) {
+      setTrophy(nextTrophyRef.current);
+      nextTrophyRef.current = TROPHIES[TROPHIES.indexOf(nextTrophy) + 1];
+    }
+  }, [trophy]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,11 +55,8 @@ const Overlay: FC<Props> = ({onEnd}) => {
 
   return (
     <div className={styles.overlay_container}>
-      <div className={styles.overlay_animation} ref={ref}>
-        <h1>{CONTENT.title}</h1>
-        <img src='/ce.svg' />
-        <p>{CONTENT.description}</p>
-      </div>
+      <div className={styles.progress} ref={progressBarRef} />
+      {trophy && <Trophy content={trophy} />}
       <EndCta isVisible={isStationary} onClick={onEnd} />
     </div>
   );
