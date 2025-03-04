@@ -1,3 +1,4 @@
+import {TrophyContent} from '@/config/trophies';
 import {create} from 'zustand';
 
 export enum SimpleGameStatus {
@@ -13,6 +14,8 @@ export interface SimpleGameStats {
 }
 
 interface SimpleStore {
+  trophy: TrophyContent | null;
+  setTrophy: (trophy: TrophyContent) => void;
   status: SimpleGameStatus;
   setStatus: (status: SimpleGameStatus) => void;
   stats: SimpleGameStats | null;
@@ -20,6 +23,8 @@ interface SimpleStore {
 }
 
 export const useSimpleStore = create<SimpleStore>((set) => ({
+  trophy: null,
+  setTrophy: (trophy) => set({trophy}),
   status: SimpleGameStatus.IDLE,
   setStatus: (status) => set({status}),
   stats: null,

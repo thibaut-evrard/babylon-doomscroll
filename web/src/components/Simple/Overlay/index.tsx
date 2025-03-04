@@ -1,33 +1,40 @@
-import {FC, useCallback, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import styles from './styles.module.scss';
-import {playAnimation} from './animation';
 import EndCta from './EndCta';
+import {useOnScroll} from '@/hooks/useOnScroll';
+import Trophy from './Trophy';
+import {TROPHIES} from '@/config/trophies';
+import {useSimpleStore} from '@/store/simple';
 
 interface Props {
   onEnd: () => void;
 }
 
-const CONTENT = {
-  title: 'Fumeur de C.E',
-  description: 'parcours 100 posts',
-};
-
-const BADGE_SCROLL = 40000;
 const SCROLL_CHECK_INTERVAL = 500;
 
 const Overlay: FC<Props> = ({onEnd}) => {
-  const ref = useRef<HTMLImageElement>(null);
-  const isBadgeRef = useRef(false);
+  const {trophy, setTrophy} = useSimpleStore();
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const previousScrollRef = useRef(0);
+  const nextTrophyRef = useRef(TROPHIES[0]);
   const [isStationary, setIsStationary] = useState(false);
 
-  const handleOnScroll = useCallback(() => {
-    if (!ref.current) return;
-    if (window.scrollY > BADGE_SCROLL && !isBadgeRef.current) {
-      isBadgeRef.current = true;
-      playAnimation(ref.current);
+  useOnScroll(() => {
+    const nextTrophy = nextTrophyRef.current;
+    if (!nextTrophy) return;
+
+    if (progressBarRef.current) {
+      const minScroll = trophy?.scroll || 0;
+      const maxScroll = nextTrophy.scroll;
+      const progress = (window.scrollY - minScroll) / (maxScroll - minScroll);
+      progressBarRef.current.style.scale = `1 ${progress}`;
     }
-  }, []);
+
+    if (window.scrollY > nextTrophy.scroll) {
+      setTrophy(nextTrophyRef.current);
+      nextTrophyRef.current = TROPHIES[TROPHIES.indexOf(nextTrophy) + 1];
+    }
+  }, [trophy]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,20 +50,10 @@ const Overlay: FC<Props> = ({onEnd}) => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    if (!ref.current) return;
-    window.addEventListener('scroll', handleOnScroll);
-
-    return () => window.removeEventListener('scroll', handleOnScroll);
-  }, [handleOnScroll]);
-
   return (
     <div className={styles.overlay_container}>
-      <div className={styles.overlay_animation} ref={ref}>
-        <h1>{CONTENT.title}</h1>
-        <img src='/ce.svg' />
-        <p>{CONTENT.description}</p>
-      </div>
+      <div className={styles.progress} ref={progressBarRef} />
+      {trophy && <Trophy content={trophy} />}
       <EndCta isVisible={isStationary} onClick={onEnd} />
     </div>
   );

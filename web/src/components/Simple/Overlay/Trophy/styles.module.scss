@@ -1,0 +1,23 @@
+.trophy {
+  scale: 0;
+  opacity: 0;
+
+  text-align: center;
+
+  h1,
+  p {
+    background-color: black;
+    padding: 10px;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  img {
+    width: 200px;
+    height: auto;
+  }
+}
+
+.hidden {
+  display: none;
+}

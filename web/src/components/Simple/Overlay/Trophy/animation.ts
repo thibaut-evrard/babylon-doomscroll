@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 
-export const playAnimation = (el: HTMLElement) => {
+export const playAnimation = (el: HTMLElement, onEnd: () => void) => {
   gsap
     .timeline()
     .to(el, {opacity: 1, scale: 1, ease: 'back.out', duration: 0.7})
@@ -12,5 +12,6 @@ export const playAnimation = (el: HTMLElement) => {
       rotate: '0deg',
       ease: 'back.in',
       duration: 0.7,
-    });
+    })
+    .then(onEnd);
 };
