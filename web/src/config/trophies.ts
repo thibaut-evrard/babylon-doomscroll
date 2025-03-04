@@ -39,7 +39,7 @@ export const TROPHIES = [
     description: 'parcours 100 posts',
   },
   {
-    scroll: cmToPx(5000),
+    scroll: cmToPx(50000),
     title: 'Dopaminomane',
     image: {
       src: '/ce.svg',
