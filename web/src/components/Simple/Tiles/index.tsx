@@ -1,5 +1,6 @@
+import {useOnScroll} from '@/hooks/useOnScroll';
 import styles from './styles.module.scss';
-import {useCallback, useEffect, useState, FC} from 'react';
+import {useState, FC} from 'react';
 
 interface Props {
   containerRef: React.RefObject<HTMLDivElement | null>;
@@ -11,20 +12,13 @@ const MIN_REMAINING_SCROLL = 5000;
 const Tiles: FC<Props> = ({containerRef}) => {
   const [tiles, setTiles] = useState([...TILE_BATCH]);
 
-  const handleOnScroll = useCallback(() => {
+  useOnScroll(() => {
     if (!containerRef.current) return;
     const remainingScroll = containerRef.current.clientHeight - window.scrollY;
     if (remainingScroll < MIN_REMAINING_SCROLL) {
       setTiles((prev) => [...prev, ...TILE_BATCH]);
     }
   }, [containerRef]);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    window.addEventListener('scroll', handleOnScroll);
-
-    return () => window.removeEventListener('scroll', handleOnScroll);
-  }, [handleOnScroll, containerRef]);
 
   return (
     <>

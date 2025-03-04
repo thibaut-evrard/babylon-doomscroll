@@ -2,6 +2,7 @@ import {FC, useCallback, useEffect, useRef, useState} from 'react';
 import styles from './styles.module.scss';
 import {playAnimation} from './animation';
 import EndCta from './EndCta';
+import {useOnScroll} from '@/hooks/useOnScroll';
 
 interface Props {
   onEnd: () => void;
@@ -21,13 +22,13 @@ const Overlay: FC<Props> = ({onEnd}) => {
   const previousScrollRef = useRef(0);
   const [isStationary, setIsStationary] = useState(false);
 
-  const handleOnScroll = useCallback(() => {
+  useOnScroll(() => {
     if (!ref.current) return;
     if (window.scrollY > BADGE_SCROLL && !isBadgeRef.current) {
       isBadgeRef.current = true;
       playAnimation(ref.current);
     }
-  }, []);
+  }, [ref]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -42,13 +43,6 @@ const Overlay: FC<Props> = ({onEnd}) => {
 
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    window.addEventListener('scroll', handleOnScroll);
-
-    return () => window.removeEventListener('scroll', handleOnScroll);
-  }, [handleOnScroll]);
 
   return (
     <div className={styles.overlay_container}>

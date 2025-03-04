@@ -7,6 +7,7 @@ import {useGameManager} from '@/components/Simple/hooks/useGameManager';
 import {SimpleGameStatus, useSimpleStore} from '@/store/simple';
 import Takeaway from '@/components/Simple/Takeaway';
 import Tiles from '@/components/Simple/Tiles';
+import {useOnScroll} from '@/hooks/useOnScroll';
 
 const START_SCROLL_THRESHOLD = 100;
 
@@ -15,7 +16,7 @@ const Home: React.FC = () => {
   const {status, stats} = useSimpleStore();
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleOnScroll = useCallback(() => {
+  useOnScroll(() => {
     if (
       status === SimpleGameStatus.IDLE &&
       window.scrollY > START_SCROLL_THRESHOLD
@@ -23,13 +24,6 @@ const Home: React.FC = () => {
       game.start();
     }
   }, []);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    window.addEventListener('scroll', handleOnScroll);
-
-    return () => window.removeEventListener('scroll', handleOnScroll);
-  }, [status, handleOnScroll]);
 
   return (
     <>
