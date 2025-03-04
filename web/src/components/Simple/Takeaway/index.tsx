@@ -1,4 +1,4 @@
-import {SimpleGameStats} from '@/store/simple';
+import {SimpleGameStats, useSimpleStore} from '@/store/simple';
 import styles from './styles.module.scss';
 import {FC} from 'react';
 import {pxToKm} from '@/utils/units';
@@ -8,9 +8,9 @@ const CONTENT = {
   stats: {
     time: 'temps: ',
     distance: 'distance: ',
-    speed: 'vitesse moyenne: ',
+    speed: 'vitesse: ',
   },
-  cta: 'Partager sur linkedin',
+  cta: 'Partager',
 };
 
 interface Props {
@@ -20,6 +20,7 @@ interface Props {
 }
 
 const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
+  const {trophy} = useSimpleStore();
   const timeInH = stats.time / 3600;
   const distanceInKm = pxToKm(stats.distance);
   const speedInKmH = distanceInKm / timeInH;
@@ -30,7 +31,8 @@ const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
         <button className={styles.close} onClick={onClose}>
           X
         </button>
-        <h1>{CONTENT.title}</h1>
+        <h1>{trophy ? trophy.title : CONTENT.title}</h1>
+        {trophy && <img src={trophy.image.src} alt={trophy.image.alt} />}
         <ul className='text__medium'>
           <li>
             {CONTENT.stats.time} <b>{stats.time.toFixed(2)}s</b>
@@ -42,7 +44,9 @@ const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
             {CONTENT.stats.speed} <b>{speedInKmH.toFixed(2)}km/h</b>
           </li>
         </ul>
-        <button onClick={onShare}>{CONTENT.cta}</button>
+        <button className={styles.takeaway__card__cta} onClick={onShare}>
+          {CONTENT.cta}
+        </button>
       </div>
     </div>
   );

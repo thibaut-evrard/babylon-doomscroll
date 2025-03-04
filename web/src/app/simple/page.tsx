@@ -1,5 +1,5 @@
 'use client';
-import {useCallback, useEffect, useRef} from 'react';
+import {useRef} from 'react';
 import styles from './styles.module.scss';
 import Header from '@/components/Simple/Header';
 import Overlay from '@/components/Simple/Overlay';
