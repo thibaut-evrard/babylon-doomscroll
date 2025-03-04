@@ -12,13 +12,15 @@
   "dependencies": {
     "@types/three": "^0.173.0",
     "eventemitter3": "^5.0.1",
+    "gsap": "^3.12.7",
     "husky": "^9.1.7",
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-confetti": "^6.2.2",
     "react-dom": "^19.0.0",
     "sass": "^1.85.0",
-    "three": "^0.173.0"
+    "three": "^0.173.0",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -5,6 +5,10 @@ interface MoveEvent {
   position: Vector2;
 }
 
+interface WheelEvent {
+  offset: Vector2;
+}
+
 class GameInput {
   onScroll?: (offset: number) => void;
   private inputEvents: UserInput;
@@ -32,6 +36,10 @@ class GameInput {
     this.position.copy(position);
   };
 
+  private readonly onWheel = ({offset}: WheelEvent) => {
+    if (this.onScroll) this.onScroll(-offset.y);
+  };
+
   constructor(inputEvents: UserInput) {
     this.inputEvents = inputEvents;
     this.initListeners();
@@ -42,6 +50,7 @@ class GameInput {
   }
 
   private initListeners() {
+    this.inputEvents.on(InputEvent.WHEEL, this.onWheel);
     this.inputEvents.on(InputEvent.POINTER_DOWN, this.onPointerDown);
     this.inputEvents.on(InputEvent.POINTER_UP, this.onPointerUp);
     this.inputEvents.on(InputEvent.POINTER_MOVE, this.onPointerMove);

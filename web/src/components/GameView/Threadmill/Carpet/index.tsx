@@ -5,10 +5,12 @@ interface Props {
   distance: number;
 }
 
+const SPEED = 50;
+
 const Carpet: FC<Props> = ({distance}) => {
   const [style, setStyle] = useState('translateY(0%)');
   useEffect(() => {
-    setStyle(`translateY(-${distance % 50}%)`);
+    setStyle(`translateY(-${(distance * SPEED) % 50}%)`);
   }, [distance]);
 
   return (

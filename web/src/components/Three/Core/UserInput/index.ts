@@ -15,7 +15,7 @@ export enum InputEvent {
 const ACTIVE = {passive: false};
 
 class UserInput extends EventEmitter {
-  private readonly canvas: HTMLCanvasElement;
+  private readonly canvas: HTMLElement;
 
   private readonly onTouchStartHandler = (evt: TouchEvent) => {
     evt.preventDefault();
@@ -83,7 +83,7 @@ class UserInput extends EventEmitter {
     this.emit(InputEvent.KEY_PRESS, {key});
   };
 
-  constructor(canvas: HTMLCanvasElement) {
+  constructor(canvas: HTMLElement) {
     super();
     this.canvas = canvas;
     this.initListeners();

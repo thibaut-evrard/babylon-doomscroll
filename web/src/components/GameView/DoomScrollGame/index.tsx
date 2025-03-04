@@ -1,34 +1,28 @@
-import {GameStats, GameStatus, Score} from '@/app/game/page';
+import styles from './styles.module.scss';
+import {GameStats, GameStatus, Score} from '..';
 import {FC, useEffect, useRef, useState} from 'react';
 import Threadmill from '../Threadmill';
-import {REWARDS} from '../../config/rewardsConfig';
+import {REWARDS} from '@/config/rewardsConfig';
+import {useGameStore} from '@/store/game';
 
 interface Props {
-  userName: string;
   status: GameStatus;
   onOver: (score: Score) => void;
   onStats: (stats: GameStats) => void;
-  onRewards: (rewards: string[]) => void;
 }
 
-const DoomScrollGame: FC<Props> = ({
-  status,
-  userName,
-  onOver,
-  onStats,
-  onRewards,
-}) => {
+const DoomScrollGame: FC<Props> = ({status, onOver, onStats}) => {
+  const {username, achievements, setAchievements} = useGameStore();
   const timeRef = useRef<NodeJS.Timeout | null>(null);
   const [time, setTime] = useState(0);
   const [distance, setDistance] = useState(0);
   const [speed, setSpeed] = useState(0);
-  const [rewards, setRewards] = useState<string[]>([]);
 
   const updateRewards = (newDistance: number) => {
     const newRewards = REWARDS.filter(
       (reward) => newDistance >= reward.distance
     ).map((reward) => reward.name);
-    setRewards(newRewards);
+    setAchievements(newRewards);
   };
 
   const handleOnScroll = (newDistance: number) => {
@@ -42,20 +36,20 @@ const DoomScrollGame: FC<Props> = ({
   };
 
   const endGame = () => {
-    const title = rewards.at(-1) || '';
-    onOver({name: userName, distance, title});
+    const title = achievements.at(-1) || '';
+    onOver({name: username, distance, title});
 
     clearInterval(timeRef.current as NodeJS.Timeout);
     setTime(0);
     setDistance(0);
     setSpeed(0);
-    setRewards([]);
+    setAchievements([]);
   };
 
   useEffect(() => {
     if (time > 0) {
       // Calculer la vitesse en km/h
-      const speedKmh = (distance / time) * 3.6; // Convertir m/s en km/h
+      const speedKmh = (distance / time) * 0.36; // Convertir m/s en km/h
       setSpeed(speedKmh);
     }
   }, [time, distance]);
@@ -73,15 +67,11 @@ const DoomScrollGame: FC<Props> = ({
   }, [status]);
 
   useEffect(() => {
-    onRewards(rewards);
-  }, [rewards]);
-
-  useEffect(() => {
     updateRewards(distance);
   }, [distance]);
 
   return (
-    <div>
+    <div className={styles.threadmill__container}>
       <Threadmill
         isRunning={status === GameStatus.PLAYING}
         onScroll={handleOnScroll}

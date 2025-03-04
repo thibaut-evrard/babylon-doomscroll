@@ -1,4 +1,4 @@
-import {BoxGeometry, Mesh, MeshNormalMaterial, PlaneGeometry} from 'three';
+import {Mesh, MeshNormalMaterial, PlaneGeometry} from 'three';
 
 class Treadmill extends Mesh {
   constructor() {
