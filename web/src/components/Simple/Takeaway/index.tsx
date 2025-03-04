@@ -1,6 +1,7 @@
 import {SimpleGameStats} from '@/store/simple';
 import styles from './styles.module.scss';
 import {FC} from 'react';
+import {pxToKm} from '@/utils/units';
 
 const CONTENT = {
   title: 'Scroll du matin',
@@ -19,6 +20,10 @@ interface Props {
 }
 
 const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
+  const timeInH = stats.time / 3600;
+  const distanceInKm = pxToKm(stats.distance);
+  const speedInKmH = distanceInKm / timeInH;
+
   return (
     <div className={styles.takeaway}>
       <div className={styles.takeaway__card}>
@@ -31,10 +36,10 @@ const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
             {CONTENT.stats.time} <b>{stats.time.toFixed(2)}s</b>
           </li>
           <li>
-            {CONTENT.stats.distance} <b>{stats.distance.toFixed(2)}Kpx</b>
+            {CONTENT.stats.distance} <b>{distanceInKm.toFixed(2)}km</b>
           </li>
           <li>
-            {CONTENT.stats.speed} <b>{stats.averageSpeed.toFixed(2)}Kpx/s</b>
+            {CONTENT.stats.speed} <b>{speedInKmH.toFixed(2)}km/h</b>
           </li>
         </ul>
         <button onClick={onShare}>{CONTENT.cta}</button>

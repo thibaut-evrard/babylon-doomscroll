@@ -22,10 +22,6 @@ const Overlay: FC<Props> = ({onEnd}) => {
     const nextTrophy = nextTrophyRef.current;
     if (!nextTrophy) return;
 
-    if (trophy) {
-      console.log(trophy.scroll, nextTrophy.scroll);
-    }
-
     if (progressBarRef.current) {
       const minScroll = trophy?.scroll || 0;
       const maxScroll = nextTrophy.scroll;

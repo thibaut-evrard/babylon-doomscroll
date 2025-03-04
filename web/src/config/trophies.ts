@@ -1,4 +1,4 @@
-const cmToPx = (cm: number) => (cm / 2.54) * 96;
+import {cmToPx} from '@/utils/units';
 
 export interface TrophyContent {
   scroll: number;
