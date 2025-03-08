@@ -1,3 +1,4 @@
+import {ICONS} from '@/config/sources';
 import styles from './styles.module.scss';
 
 const CONTENT = {
@@ -15,7 +16,7 @@ const Header = () => {
       </div>
       <div>
         <p className='label'>{CONTENT.cta}</p>
-        <img className={styles.arrow} src='/arrow.svg' alt='arrow' />
+        <img className={styles.arrow} src={ICONS.arrow} alt='arrow' />
       </div>
     </div>
   );
