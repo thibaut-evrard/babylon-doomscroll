@@ -1,8 +1,8 @@
 import styles from './styles.module.scss';
 
 const CONTENT = {
-  title: 'Babylon Doomscroll',
-  description: `Scroll sans relâche pour devenir un Technolord et te dresser au-dessus des Technoserfs. Pousse tes limites toujours plus loin et impose ta domination dans ce royaume technoféodal, où seule la persévérance fait le maître !`,
+  title: 'BABYLON DOOMSCROLL',
+  description: `Scrolle sans relâche pour devenir un Technolord et te dresser au-dessus des Technoserfs. Pousse tes limites toujours plus loin et impose ta domination dans ce royaume technoféodal, où seule la persévérance fait le maître !`,
   cta: 'Scroll et deviens un technolord',
 };
 
