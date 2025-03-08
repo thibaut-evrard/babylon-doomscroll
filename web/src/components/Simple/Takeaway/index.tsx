@@ -5,6 +5,9 @@ import {pxToKm} from '@/utils/units';
 
 const CONTENT = {
   title: 'Scroll du matin',
+  nav: {
+    title: 'TECHNOFÉODAL DOOMSCROLL',
+  },
   stats: {
     time: 'temps: ',
     distance: 'distance: ',
@@ -28,9 +31,12 @@ const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
   return (
     <div className={styles.takeaway}>
       <div className={styles.takeaway__card}>
-        <button className={styles.close} onClick={onClose}>
-          X
-        </button>
+        <nav>
+          <p>{CONTENT.nav.title}</p>
+          <button className={styles.close} onClick={onClose}>
+            X
+          </button>
+        </nav>
         <h1>{trophy ? trophy.title : CONTENT.title}</h1>
         {trophy && <img src={trophy.image.src} alt={trophy.image.alt} />}
         <ul className='text__medium'>

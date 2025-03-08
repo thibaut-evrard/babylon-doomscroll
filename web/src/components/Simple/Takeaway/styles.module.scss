@@ -13,6 +13,7 @@
   backdrop-filter: blur(10px);
 
   &__card {
+    border: 2px solid black;
     position: relative;
     width: clamp(200px, 100%, 500px);
     height: clamp(300px, 100%, 600px);
@@ -23,6 +24,28 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    & > nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px;
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & > button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      p {
+        padding-top: 5px;
+        margin: 0;
+      }
+    }
 
     & > h1 {
       margin: 0;
@@ -53,12 +76,6 @@
 }
 
 .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 35px;
-  height: 35px;
-
   padding: 5px;
   align-self: flex-end;
 

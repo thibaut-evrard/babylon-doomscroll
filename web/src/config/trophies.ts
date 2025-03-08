@@ -1,4 +1,5 @@
-import {cmToPx} from '@/utils/units';
+import {mToPx} from '@/utils/units';
+import {BADGES} from './sources';
 
 export interface TrophyContent {
   scroll: number;
@@ -12,39 +13,111 @@ export interface TrophyContent {
 
 export const TROPHIES = [
   {
-    scroll: cmToPx(1000),
-    title: 'Techno boomer',
+    scroll: mToPx(1),
+    title: 'Michel le Berger',
     image: {
-      src: '/ce.svg',
+      src: BADGES.michelBerger,
       alt: 'Trophy',
     },
-    description: 'parcours 100 posts',
+    description: 'Les brebis avant le scroll',
   },
   {
-    scroll: cmToPx(5000),
-    title: 'Technoserf',
+    scroll: mToPx(5),
+    title: 'Mamie',
     image: {
-      src: '/ce.svg',
+      src: BADGES.mamie,
       alt: 'Trophy',
     },
-    description: 'parcours 100 posts',
+    description: `Ecris comment scroller sur un bout de papier`,
   },
   {
-    scroll: cmToPx(10000),
-    title: 'Fumeur de C.E',
+    scroll: mToPx(10),
+    title: 'Esprit libre',
     image: {
-      src: '/ce.svg',
+      src: BADGES.technoEspritLibre,
       alt: 'Trophy',
     },
-    description: 'parcours 100 posts',
+    description: `Le scroll c'est babylone, man`,
   },
   {
-    scroll: cmToPx(50000),
+    scroll: mToPx(20),
+    title: 'Bon Français',
+    image: {
+      src: BADGES.bonFrancais,
+      alt: 'Trophy',
+    },
+    description: `Embrasse la tradition`,
+  },
+  {
+    scroll: mToPx(30),
     title: 'Dopaminomane',
     image: {
-      src: '/ce.svg',
+      src: BADGES.dopaminomane,
       alt: 'Trophy',
     },
-    description: 'parcours 100 posts',
+    description: `Essaye de finir instagram sur la toilettte`,
+  },
+  {
+    scroll: mToPx(40),
+    title: 'Tech Bro',
+    image: {
+      src: BADGES.technoBro,
+      alt: 'Trophy',
+    },
+    description: `Scroll l'arche de la défence`,
+  },
+  {
+    scroll: mToPx(50),
+    title: 'Techno CEO',
+    image: {
+      src: BADGES.technoCeo,
+      alt: 'Trophy',
+    },
+    description: `Le capitalisme a papa`,
+  },
+  {
+    scroll: mToPx(60),
+    title: 'Fumeur de CE',
+    image: {
+      src: BADGES.fumeurDeCe,
+      alt: 'Trophy',
+    },
+    description: `Embrasse la modernité`,
+  },
+  {
+    scroll: mToPx(70),
+    title: 'Moine du scroll',
+    image: {
+      src: BADGES.moineDuScroll,
+      alt: 'Trophy',
+    },
+    description: `Le scroll comme religion`,
+  },
+  {
+    scroll: mToPx(80),
+    title: 'Techno chevalier',
+    image: {
+      src: BADGES.technoChevalier,
+      alt: 'Trophy',
+    },
+    description: `Adoubé de l'ère Technoféodale`,
+  },
+  {
+    scroll: mToPx(90),
+    title: 'Techno Lord',
+    image: {
+      src: BADGES.technoKing,
+      alt: 'Trophy',
+    },
+    description: `Manage des clusters Kubernetes`,
+  },
+  {
+    scroll: mToPx(100),
+    title: 'Esprit Technoféodal',
+    image: {
+      src: BADGES.technoEsprit,
+      alt: 'Trophy',
+    },
+    description: `L'empereur du cloud`,
   },
 ];
