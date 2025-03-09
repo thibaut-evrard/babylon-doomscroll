@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import EndCta from './EndCta';
 import {useOnScroll} from '@/hooks/useOnScroll';
 import Trophy from './Trophy';
+
 import {useGameStore} from '@/store';
 import {CONTENT_SERVICE} from '@/config/content';
 
