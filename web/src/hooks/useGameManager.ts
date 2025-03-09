@@ -1,17 +1,17 @@
-import {SimpleGameStatus, useSimpleStore} from '@/store';
+import {GameStatus, useGameStore} from '@/store';
 import {useRef} from 'react';
 
 export const useGameManager = () => {
-  const {setStatus, setStats} = useSimpleStore();
+  const {setStatus, setStats} = useGameStore();
   const timeRef = useRef<number>(0);
 
   const start = () => {
-    setStatus(SimpleGameStatus.RUNNING);
+    setStatus(GameStatus.RUNNING);
     timeRef.current = performance.now();
   };
 
   const end = () => {
-    setStatus(SimpleGameStatus.END);
+    setStatus(GameStatus.END);
     const time = (performance.now() - timeRef.current) / 1000;
     const distance = window.scrollY;
     const averageSpeed = distance / time;

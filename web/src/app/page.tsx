@@ -3,8 +3,8 @@ import {useRef} from 'react';
 import styles from './styles.module.scss';
 import Header from '@/components/Header';
 import Overlay from '@/components/Overlay';
-import {useGameManager} from '@/components/hooks/useGameManager';
-import {SimpleGameStatus, useSimpleStore} from '@/store';
+import {useGameManager} from '@/hooks/useGameManager';
+import {GameStatus, useGameStore} from '@/store';
 import Takeaway from '@/components/Takeaway';
 import Tiles from '@/components/Tiles';
 import {useOnScroll} from '@/hooks/useOnScroll';
@@ -15,15 +15,12 @@ const START_SCROLL_THRESHOLD = 100;
 
 const Home: React.FC = () => {
   const game = useGameManager();
-  const {status, stats} = useSimpleStore();
+  const {status, stats} = useGameStore();
   const ref = useRef<HTMLDivElement>(null);
   useImagePreloader(BADGES);
 
   useOnScroll(() => {
-    if (
-      status === SimpleGameStatus.IDLE &&
-      window.scrollY > START_SCROLL_THRESHOLD
-    ) {
+    if (status === GameStatus.IDLE && window.scrollY > START_SCROLL_THRESHOLD) {
       game.start();
     }
   }, []);
@@ -35,7 +32,7 @@ const Home: React.FC = () => {
         <Tiles containerRef={ref} />
       </div>
       <Overlay onEnd={game.end} />
-      {status === SimpleGameStatus.END && stats && <Takeaway stats={stats} />}
+      {status === GameStatus.END && stats && <Takeaway stats={stats} />}
     </>
   );
 };

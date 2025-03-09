@@ -4,7 +4,7 @@ import EndCta from './EndCta';
 import {useOnScroll} from '@/hooks/useOnScroll';
 import Trophy from './Trophy';
 import {TROPHIES} from '@/config/trophies';
-import {useSimpleStore} from '@/store';
+import {useGameStore} from '@/store';
 
 interface Props {
   onEnd: () => void;
@@ -13,7 +13,7 @@ interface Props {
 const SCROLL_CHECK_INTERVAL = 500;
 
 const Overlay: FC<Props> = ({onEnd}) => {
-  const {trophy, setTrophy} = useSimpleStore();
+  const {trophy, setTrophy} = useGameStore();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const previousScrollRef = useRef(0);
   const nextTrophyRef = useRef(TROPHIES[0]);

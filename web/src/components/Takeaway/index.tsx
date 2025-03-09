@@ -1,4 +1,4 @@
-import {SimpleGameStats, useSimpleStore} from '@/store';
+import {GameSessionStats, useGameStore} from '@/store';
 import styles from './styles.module.scss';
 import {FC} from 'react';
 import {pxToKm} from '@/utils/units';
@@ -18,13 +18,13 @@ const CONTENT = {
 };
 
 interface Props {
-  stats: SimpleGameStats;
+  stats: GameSessionStats;
   onClose?: () => void;
   onShare?: () => void;
 }
 
 const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
-  const {trophy} = useSimpleStore();
+  const {trophy} = useGameStore();
   const timeInH = stats.time / 3600;
   const distanceInKm = pxToKm(stats.distance);
   const speedInKmH = distanceInKm / timeInH;

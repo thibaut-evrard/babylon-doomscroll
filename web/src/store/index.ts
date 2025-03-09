@@ -1,31 +1,31 @@
 import {TrophyContent} from '@/config/trophies';
 import {create} from 'zustand';
 
-export enum SimpleGameStatus {
+export enum GameStatus {
   IDLE = 'IDLE',
   RUNNING = 'RUNNING',
   END = 'END',
 }
 
-export interface SimpleGameStats {
+export interface GameSessionStats {
   time: number;
   distance: number;
   averageSpeed: number;
 }
 
-interface SimpleStore {
+interface GameStore {
   trophy: TrophyContent | null;
   setTrophy: (trophy: TrophyContent) => void;
-  status: SimpleGameStatus;
-  setStatus: (status: SimpleGameStatus) => void;
-  stats: SimpleGameStats | null;
-  setStats: (stats: SimpleGameStats) => void;
+  status: GameStatus;
+  setStatus: (status: GameStatus) => void;
+  stats: GameSessionStats | null;
+  setStats: (stats: GameSessionStats) => void;
 }
 
-export const useSimpleStore = create<SimpleStore>((set) => ({
+export const useGameStore = create<GameStore>((set) => ({
   trophy: null,
   setTrophy: (trophy) => set({trophy}),
-  status: SimpleGameStatus.IDLE,
+  status: GameStatus.IDLE,
   setStatus: (status) => set({status}),
   stats: null,
   setStats: (stats) => set({stats}),
