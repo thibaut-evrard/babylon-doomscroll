@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Three Tools',
-  description: 'Three.js toolkit',
+  title: 'Technoféodal Doomscroll',
+  description: `Scrolle a l'infini`,
 };
 
 export default function RootLayout({
