@@ -1,9 +1,10 @@
 import type {Metadata} from 'next';
-import {Geist, Geist_Mono} from 'next/font/google';
+import {Chakra_Petch, Geist_Mono} from 'next/font/google';
 import './globals.scss';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const chakraPetch = Chakra_Petch({
+  weight: ['400', '700'],
+  variable: '--font-chakra-petch',
   subsets: ['latin'],
 });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${chakraPetch.variable} ${geistMono.variable}`}>
         {children}
       </body>
     </html>

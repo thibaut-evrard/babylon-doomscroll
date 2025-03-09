@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {playAnimation} from './animation';
 import styles from './styles.module.scss';
 import {FC, useEffect, useRef} from 'react';
@@ -26,7 +27,12 @@ const Trophy: FC<Props> = ({content, onAnimationEnd}) => {
   return (
     <div className={styles.trophy} ref={ref}>
       <h1>{content.title}</h1>
-      <img src={content.image.src} alt={content.image.alt} />
+      <Image
+        src={content.image.src}
+        alt={content.image.alt}
+        width={500}
+        height={500}
+      />
       <p>{content.description}</p>
     </div>
   );
