@@ -1,10 +1,8 @@
 .playPauseButton {
   background-color: transparent;
 
+  position: relative;
   pointer-events: all;
-
-  position: absolute;
-  right: 0;
   padding: 5px;
   width: 50px;
   height: 50px;

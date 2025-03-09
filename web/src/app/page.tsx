@@ -16,7 +16,7 @@ const START_SCROLL_THRESHOLD = 100;
 
 const Home: React.FC = () => {
   const game = useGameManager();
-  const {status, stats} = useGameStore();
+  const {status, stats, setStatus} = useGameStore();
   const ref = useRef<HTMLDivElement>(null);
   useImagePreloader(BADGES);
 
@@ -26,6 +26,10 @@ const Home: React.FC = () => {
     }
   }, []);
 
+  const handleOnClose = () => {
+    setStatus(GameStatus.RUNNING);
+  };
+
   return (
     <>
       <Navbar onPause={game.end} />
@@ -34,7 +38,9 @@ const Home: React.FC = () => {
         <Tiles containerRef={ref} />
       </div>
       <Overlay onEnd={game.end} />
-      {status === GameStatus.END && stats && <Takeaway stats={stats} />}
+      {status === GameStatus.END && stats && (
+        <Takeaway stats={stats} onClose={handleOnClose} />
+      )}
     </>
   );
 };

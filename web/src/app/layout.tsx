@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Technoféodal Doomscroll',
   description: `Scrolle a l'infini`,
+  openGraph: {
+    title: 'Technoféodal Doomscroll',
+    description: `Scrolle a l'infini`,
+    images: ['/assets/metadata/og-image.jpg'],
+  },
 };
 
 export default function RootLayout({
