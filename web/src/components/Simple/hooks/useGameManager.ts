@@ -13,7 +13,7 @@ export const useGameManager = () => {
   const end = () => {
     setStatus(SimpleGameStatus.END);
     const time = (performance.now() - timeRef.current) / 1000;
-    const distance = window.scrollY / 1000;
+    const distance = window.scrollY;
     const averageSpeed = distance / time;
 
     setStats({

@@ -8,28 +8,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
-  .overlay_animation {
-    scale: 0;
-    opacity: 0;
-
-    text-align: center;
-
-    h1,
-    p {
-      background-color: black;
-      padding: 10px;
-      color: white;
-      text-transform: uppercase;
-    }
-
-    img {
-      width: 200px;
-      height: auto;
-    }
-  }
-
-  .hidden {
-    display: none;
-  }
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 4px;
+  background-color: green;
+  transform-origin: top left;
+  scale: 1 0;
 }
