@@ -8,6 +8,8 @@ import {SimpleGameStatus, useSimpleStore} from '@/store/simple';
 import Takeaway from '@/components/Simple/Takeaway';
 import Tiles from '@/components/Simple/Tiles';
 import {useOnScroll} from '@/hooks/useOnScroll';
+import {useImagePreloader} from '@/hooks/useImagePreloader';
+import {BADGES} from '@/config/sources';
 
 const START_SCROLL_THRESHOLD = 100;
 
@@ -15,6 +17,7 @@ const Home: React.FC = () => {
   const game = useGameManager();
   const {status, stats} = useSimpleStore();
   const ref = useRef<HTMLDivElement>(null);
+  useImagePreloader(BADGES);
 
   useOnScroll(() => {
     if (
