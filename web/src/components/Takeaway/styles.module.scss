@@ -1,4 +1,40 @@
-.takeaway {
+@keyframes cardShine {
+  0% {
+    transform: translate(10%, 10%) rotateY(5deg) rotateX(5deg);
+  }
+  25% {
+    transform: translate(-10%, 10%);
+  }
+  50% {
+    transform: translate(-10%, -10%);
+  }
+  75% {
+    transform: translate(10%, -10%);
+  }
+  100% {
+    transform: translate(10%, 10%);
+  }
+}
+
+@keyframes cardAmbient {
+  0% {
+    transform: rotateY(5deg) rotateX(5deg);
+  }
+  25% {
+    transform: rotateY(-5deg) rotateX(5deg);
+  }
+  50% {
+    transform: rotateY(-5deg) rotateX(-5deg);
+  }
+  75% {
+    transform: rotateY(5deg) rotateX(-5deg);
+  }
+  100% {
+    transform: rotateY(5deg) rotateX(5deg);
+  }
+}
+
+.takeaway__backdrop {
   position: fixed;
   z-index: 2;
   padding: 50px;
@@ -12,76 +48,110 @@
 
   background-color: #0009;
   backdrop-filter: blur(10px);
+  perspective: 800px;
 
-  &__card {
-    border: 2px solid black;
-    position: relative;
-    width: clamp(200px, 100%, 500px);
-    height: clamp(300px, 100%, 600px);
-    padding: 60px 20px 20px 20px;
-    background-color: white;
-    border-radius: 20px;
+  & > button {
+    position: fixed;
+    bottom: 20px;
+  }
+}
 
+.takeaway__card__shine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 30%,
+    rgba(255, 255, 255, 0) 80%
+  );
+
+  animation: cardShine 10s infinite ease-in-out;
+}
+
+.takeaway__card {
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  width: min(100%, 400px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 10px;
+
+  transform-style: preserve-3d;
+  animation: cardAmbient 10s infinite ease-in-out;
+
+  border: 8px solid black;
+  border-radius: 10px;
+  background-image: url('/assets/card/back.webp');
+  background-size: 200px;
+  background-repeat: repeat;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-blend-mode: lighten;
+
+  & > nav {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
+    color: #555;
 
-    & > nav {
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: 10px;
-      width: 100%;
+    p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    button {
+      padding: 0;
+      margin-right: -10px;
+      height: 30px;
+      width: 30px;
 
       display: flex;
       justify-content: center;
       align-items: center;
 
-      & > button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-      }
-      p {
-        padding-top: 5px;
-        margin: 0;
-      }
+      color: inherit;
+      font-family: inherit;
+      background-color: transparent;
     }
+  }
 
-    & > h1 {
-      margin: 0;
-    }
+  ul {
+    padding: 0;
+    margin: 0;
 
-    & > img {
-      height: 200px;
-    }
-
-    ul {
+    li {
+      list-style: none;
       padding: 0;
-      margin: 0;
-
-      li {
-        list-style: none;
-        padding: 0;
-        margin: 10px 0;
-      }
-    }
-
-    &__cta {
-      padding: 10px 20px;
-      font-size: 16px;
-      align-self: center;
-      width: fit-content;
+      margin: 2px 0;
     }
   }
 }
 
-.close {
-  padding: 5px;
-  align-self: flex-end;
+.takeaway__card__trophy {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
 
-  border: 2px solid #ccc;
-  color: #ccc;
-  background-color: transparent;
-  box-shadow: none;
+  h2 {
+    text-transform: uppercase;
+  }
+
+  h2,
+  i {
+    margin: 0;
+  }
+
+  img {
+    padding: 20px;
+    align-self: center;
+    object-fit: contain;
+    width: 80%;
+    height: auto;
+  }
 }

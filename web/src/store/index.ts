@@ -1,3 +1,4 @@
+import {CONTENT_SERVICE} from '@/config/content';
 import {TrophyContent} from '@/config/trophies';
 import {create} from 'zustand';
 
@@ -23,7 +24,7 @@ interface GameStore {
 }
 
 export const useGameStore = create<GameStore>((set) => ({
-  trophy: null,
+  trophy: CONTENT_SERVICE.trophies[0],
   setTrophy: (trophy) => set({trophy}),
   status: GameStatus.IDLE,
   setStatus: (status) => set({status}),
