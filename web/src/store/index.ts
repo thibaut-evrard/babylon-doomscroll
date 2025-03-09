@@ -1,4 +1,3 @@
-import {CONTENT_SERVICE} from '@/config/content';
 import {TrophyContent} from '@/config/trophies';
 import {create} from 'zustand';
 
