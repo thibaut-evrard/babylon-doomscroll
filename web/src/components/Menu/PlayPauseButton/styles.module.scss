@@ -1,0 +1,21 @@
+.playPauseButton {
+  background-color: transparent;
+
+  pointer-events: all;
+
+  position: absolute;
+  right: 0;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+
+  rect {
+    fill: 'red';
+  }
+
+  &:disabled {
+    cursor: initial;
+    pointer-events: none;
+    opacity: 0.2;
+  }
+}

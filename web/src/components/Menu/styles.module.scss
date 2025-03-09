@@ -1,0 +1,21 @@
+.navbar {
+  border: 1px solid black;
+  background-color: white;
+  z-index: 1;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__content {
+    position: relative;
+    width: min(100%, 600px);
+    height: 100%;
+  }
+}

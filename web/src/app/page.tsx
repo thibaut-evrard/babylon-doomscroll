@@ -10,6 +10,7 @@ import Tiles from '@/components/Tiles';
 import {useOnScroll} from '@/hooks/useOnScroll';
 import {useImagePreloader} from '@/hooks/useImagePreloader';
 import {BADGES} from '@/config/media';
+import Navbar from '@/components/Menu';
 
 const START_SCROLL_THRESHOLD = 100;
 
@@ -27,6 +28,7 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <Navbar onPause={game.end} />
       <div className={styles.scroll} ref={ref}>
         <Header />
         <Tiles containerRef={ref} />
