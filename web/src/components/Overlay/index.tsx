@@ -3,14 +3,15 @@ import styles from './styles.module.scss';
 import EndCta from './EndCta';
 import {useOnScroll} from '@/hooks/useOnScroll';
 import Trophy from './Trophy';
-import {TROPHIES} from '@/config/trophies';
 import {useGameStore} from '@/store';
+import {CONTENT_SERVICE} from '@/config/content';
 
 interface Props {
   onEnd: () => void;
 }
 
 const SCROLL_CHECK_INTERVAL = 500;
+const TROPHIES = CONTENT_SERVICE.trophies;
 
 const Overlay: FC<Props> = ({onEnd}) => {
   const {trophy, setTrophy} = useGameStore();
@@ -53,7 +54,7 @@ const Overlay: FC<Props> = ({onEnd}) => {
   return (
     <div className={styles.overlay_container}>
       <div className={styles.progress} ref={progressBarRef} />
-      {trophy && <Trophy content={trophy} />}
+      {trophy && <Trophy content={trophy} key={trophy.title} />}
       <EndCta isVisible={isStationary} onClick={onEnd} />
     </div>
   );
