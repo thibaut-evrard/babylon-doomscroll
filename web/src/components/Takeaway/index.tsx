@@ -3,19 +3,9 @@ import styles from './styles.module.scss';
 import {FC} from 'react';
 import {pxToKm} from '@/utils/units';
 import Image from 'next/image';
+import {CONTENT_SERVICE} from '@/config/content';
 
-const CONTENT = {
-  title: 'Scroll du matin',
-  nav: {
-    title: 'TECHNOFÉODAL DOOMSCROLL',
-  },
-  stats: {
-    time: 'temps: ',
-    distance: 'distance: ',
-    speed: 'vitesse: ',
-  },
-  cta: 'Partager',
-};
+const STATS_CONTENT = CONTENT_SERVICE.stats;
 
 interface Props {
   stats: GameSessionStats;
@@ -33,12 +23,12 @@ const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
     <div className={styles.takeaway}>
       <div className={styles.takeaway__card}>
         <nav>
-          <p>{CONTENT.nav.title}</p>
+          <p>{CONTENT_SERVICE.global.title}</p>
           <button className={styles.close} onClick={onClose}>
             X
           </button>
         </nav>
-        <h1>{trophy ? trophy.title : CONTENT.title}</h1>
+        <h1>{trophy?.title}</h1>
         {trophy && (
           <Image
             src={trophy.image.src}
@@ -49,17 +39,23 @@ const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
         )}
         <ul className='text__medium'>
           <li>
-            {CONTENT.stats.time} <b>{stats.time.toFixed(2)}s</b>
+            {STATS_CONTENT.time.prefix}
+            <b>{stats.time.toFixed(2)}</b>
+            {STATS_CONTENT.time.unit}
           </li>
           <li>
-            {CONTENT.stats.distance} <b>{distanceInKm.toFixed(2)}km</b>
+            {STATS_CONTENT.distance.prefix}
+            <b>{distanceInKm.toFixed(2)}</b>
+            {STATS_CONTENT.distance.unit}
           </li>
           <li>
-            {CONTENT.stats.speed} <b>{speedInKmH.toFixed(2)}km/h</b>
+            {STATS_CONTENT.speed.prefix}
+            <b>{speedInKmH.toFixed(2)}</b>
+            {STATS_CONTENT.speed.unit}
           </li>
         </ul>
         <button className={styles.takeaway__card__cta} onClick={onShare}>
-          {CONTENT.cta}
+          {CONTENT_SERVICE.shareable.cta}
         </button>
       </div>
     </div>

@@ -1,16 +1,12 @@
 import gsap from 'gsap';
 import {FC, useEffect, useRef} from 'react';
 import styles from './styles.module.scss';
+import {CONTENT_SERVICE} from '@/config/content';
 
 interface Props {
   isVisible: boolean;
   onClick: () => void;
 }
-
-const CONTENT = {
-  title: 'Fini de scrollax?',
-  cta: 'voire stats',
-};
 
 const EndCta: FC<Props> = ({isVisible, onClick}) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -36,8 +32,7 @@ const EndCta: FC<Props> = ({isVisible, onClick}) => {
 
   return (
     <div className={styles.end_container} ref={ref}>
-      <h2>{CONTENT.title}</h2>
-      <button onClick={onClick}>{CONTENT.cta}</button>
+      <button onClick={onClick}>{CONTENT_SERVICE.menu.title}</button>
     </div>
   );
 };
