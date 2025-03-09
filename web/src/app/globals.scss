@@ -11,9 +11,9 @@ html body {
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
-  color: #333;
+  font-family: var(--font-chakra-petch), sans-serif;
+  background-color: #ddd;
+  color: black;
   display: flex;
   justify-content: center;
   align-items: center;
