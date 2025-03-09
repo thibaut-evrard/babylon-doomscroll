@@ -1,4 +1,4 @@
-import {ICONS} from '@/config/sources';
+import {ICONS} from '@/config/media';
 import styles from './styles.module.scss';
 
 const CONTENT = {

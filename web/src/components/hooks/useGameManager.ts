@@ -1,4 +1,4 @@
-import {SimpleGameStatus, useSimpleStore} from '@/store/simple';
+import {SimpleGameStatus, useSimpleStore} from '@/store';
 import {useRef} from 'react';
 
 export const useGameManager = () => {

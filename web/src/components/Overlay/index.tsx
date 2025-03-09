@@ -4,7 +4,7 @@ import EndCta from './EndCta';
 import {useOnScroll} from '@/hooks/useOnScroll';
 import Trophy from './Trophy';
 import {TROPHIES} from '@/config/trophies';
-import {useSimpleStore} from '@/store/simple';
+import {useSimpleStore} from '@/store';
 
 interface Props {
   onEnd: () => void;

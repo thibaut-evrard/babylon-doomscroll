@@ -1,5 +1,5 @@
 import {mToPx} from '@/utils/units';
-import {BADGES} from './sources';
+import {BADGES} from './media';
 
 export interface TrophyContent {
   scroll: number;

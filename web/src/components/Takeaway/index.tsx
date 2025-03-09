@@ -1,4 +1,4 @@
-import {SimpleGameStats, useSimpleStore} from '@/store/simple';
+import {SimpleGameStats, useSimpleStore} from '@/store';
 import styles from './styles.module.scss';
 import {FC} from 'react';
 import {pxToKm} from '@/utils/units';
