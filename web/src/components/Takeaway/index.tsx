@@ -15,6 +15,7 @@ interface Props {
 
 const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
   const {trophy} = useGameStore();
+  const activeTrophy = trophy || CONTENT_SERVICE.trophies[0];
   const timeInH = stats.time / 3600;
   const distanceInKm = pxToKm(stats.distance);
   const speedInKmH = distanceInKm / timeInH;
@@ -28,12 +29,12 @@ const Takeaway: FC<Props> = ({stats, onClose, onShare}) => {
           <button onClick={onClose}>ⓧ</button>
         </nav>
         <div className={styles.takeaway__card__trophy}>
-          <h2>{trophy?.title}</h2>
-          <i>{trophy?.description}</i>
+          <h2>{activeTrophy.title}</h2>
+          <i>{activeTrophy.description}</i>
           {trophy && (
             <Image
-              src={trophy.image.src}
-              alt={trophy.image.alt}
+              src={activeTrophy.image.src}
+              alt={activeTrophy.image.alt}
               width={500}
               height={500}
             />

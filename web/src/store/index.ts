@@ -24,7 +24,7 @@ interface GameStore {
 }
 
 export const useGameStore = create<GameStore>((set) => ({
-  trophy: CONTENT_SERVICE.trophies[0],
+  trophy: null,
   setTrophy: (trophy) => set({trophy}),
   status: GameStatus.IDLE,
   setStatus: (status) => set({status}),

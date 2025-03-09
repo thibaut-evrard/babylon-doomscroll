@@ -17,6 +17,7 @@ interface Props {
 
 const Trophy: FC<Props> = ({content, onAnimationEnd}) => {
   const ref = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!ref.current) return;
     playAnimation(ref.current, () => {
